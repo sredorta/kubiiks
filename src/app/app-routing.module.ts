@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from './pages/home/home.component';
-import { BlogComponent } from './pages/blog/blog.component';
-import { ContactComponent } from './pages/contact/contact.component';
+import { HomeComponent } from './routes/home/home.component';
+
 
 
 const routes: Routes = [
@@ -18,18 +17,23 @@ const routes: Routes = [
   },  
   {
     path: 'blog',
-    component: BlogComponent,
+    loadChildren : () => import('./routes/blog/blog/blog.module').then(m => m.BlogModule), 
     pathMatch: 'full'
   }, 
   {
     path: 'contact',
-    component: ContactComponent,
+    loadChildren : () => import('./routes/contact/contact/contact.module').then(m => m.ContactModule), 
     pathMatch: 'full'
   },
   {
-    path: 'lazy',
-    //loadChildren: './lazy/lazy.module#LazyModule', // use this syntax for non-ivy or Angular 7 and below
-    loadChildren : () => import('./lazy/lazy.module').then(m => m.LazyModule), // new dynamic import method
+    path: 'login',
+    loadChildren : () => import('./routes/login/login/login.module').then(m => m.LoginModule), 
+    pathMatch: 'full'
+  },
+  {
+    path: 'signup',
+    loadChildren : () => import('./routes/signup/signup/signup.module').then(m => m.SignupModule), 
+    pathMatch: 'full'
   }
 ];
 

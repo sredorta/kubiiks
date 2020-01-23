@@ -45,9 +45,7 @@ import {MatAutocompleteModule,
   //MatDialogRef,
   //MatBottomSheetRef
 } from '@angular/material';
-import { HomeComponent } from './pages/home/home.component';
-import { ContactComponent } from './pages/contact/contact.component';
-import { BlogComponent } from './pages/blog/blog.component';
+import { HomeComponent } from './routes/home/home.component';
 import { Router, Scroll, RouterEvent } from '@angular/router';
 import { ViewportScroller, isPlatformServer} from '@angular/common';
 import { filter } from 'rxjs/operators';
@@ -59,14 +57,14 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { PageComponent } from './components/page/page.component';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    ContactComponent,
-    BlogComponent,
     HeaderComponent,
     FooterComponent,
     PageComponent,
@@ -120,7 +118,7 @@ import { DeviceDetectorService } from 'ngx-device-detector';
       MatToolbarModule,
       MatTooltipModule,
       //MatTreeModule
-    ],
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })],
   ],
   providers: [DeviceDetectorService],
   bootstrap: [AppComponent]

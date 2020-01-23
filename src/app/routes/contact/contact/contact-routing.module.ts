@@ -1,13 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LazyPageComponent } from './lazy-page/lazy-page.component';
 
-const routes: Routes = [
-  { path: '', component: LazyPageComponent }
-];
+
+const routes: Routes = [];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class LazyRoutingModule { }
+export class ContactRoutingModule { }
