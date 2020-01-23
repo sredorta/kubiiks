@@ -46,34 +46,28 @@ import {MatAutocompleteModule,
   //MatBottomSheetRef
 } from '@angular/material';
 import { HomeComponent } from './routes/home/home.component';
-import { Router, Scroll, RouterEvent } from '@angular/router';
-import { ViewportScroller, isPlatformServer} from '@angular/common';
-import { filter } from 'rxjs/operators';
 import { StateTransferService } from './services/state-transfer.service';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from './utils/translate-http-loader';
-import { HeaderComponent } from './components/header/header.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { PageComponent } from './components/page/page.component';
+
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { AppCommonModule } from './components/common/app-common.module'; //Contains all common modules like footer,header...
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    HeaderComponent,
-    FooterComponent,
-    PageComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserTransferStateModule,
+    AppCommonModule,
     //NGX-TRANSLATE PART
     HttpClientModule,
     TranslateModule.forRoot({
@@ -118,7 +112,8 @@ import { environment } from '../environments/environment';
       MatToolbarModule,
       MatTooltipModule,
       //MatTreeModule
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })],
+    ],
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [DeviceDetectorService],
   bootstrap: [AppComponent]
