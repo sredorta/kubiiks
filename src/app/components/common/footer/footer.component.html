@@ -1,1 +1,25 @@
-<p>footer works!</p>
+<footer class="kii-footer-wrapper">
+        <!--<div class="share-wrapper">
+            <kii-share></kii-share>
+        </div>
+        <div class="newsletter-wrapper">
+            <kii-newsletter></kii-newsletter>
+        </div>-->
+        <!--<div class="kii-footer-content-wrapper">
+          <ng-content></ng-content>
+        </div>-->
+        <div class="end "> 
+            <div class="copyright">
+                <small>{{'kiilib.footer.kubiiks' | translate}} <a class="kii-footer-link" title="kubiiks" href="https://www.kubiiks.com" rel="follow">kubiiks</a></small>
+                <small style="font-style: italic; margin-left:10px">© kubiiks 2020</small>
+            </div>
+            <div class="social">
+                <p>Social links !</p>
+            </div>
+            <!--<div *ngIf="links.length>0" class="kii-footer-social-wrapper">
+                <ng-container *ngFor="let social of links">
+                    <a *ngIf="social.link" [title]="social.name" [href]="social.link" mat-icon-button (click)="onClick(social.name)"> <i [ngClass]="social.icon"></i></a>
+                </ng-container>
+            </div>-->
+        </div> 
+</footer>

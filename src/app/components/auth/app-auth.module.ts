@@ -1,12 +1,10 @@
 ////////////////////////////////////////////////////////////////////////////////
-//Includes the minimal set of components required to show the main pages
+// Includes all components related to auth
 ////////////////////////////////////////////////////////////////////////////////
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
-import { ToolbarComponent } from './toolbar/toolbar.component';
+
 
 
 //TODO Reduce list to the strict minimum used in common feature components
@@ -51,9 +49,10 @@ import {MatAutocompleteModule,
   //MatBottomSheetRef
 } from '@angular/material';
 import { RouterModule} from '@angular/router';
-import { LanguageSelectorComponent } from './language-selector/language-selector.component';
 import { KiiLanguageService} from 'src/app/services/kii-language.service';
 import { TranslateService,TranslateModule } from '@ngx-translate/core';
+import { LoginFormComponent } from './login-form/login-form.component';
+import { SignupFormComponent } from './signup-form/signup-form.component';
 
 
 @NgModule({
@@ -99,17 +98,13 @@ import { TranslateService,TranslateModule } from '@ngx-translate/core';
     ],
   ],
   declarations: [
-    HeaderComponent,
-    FooterComponent,
-    ToolbarComponent,
-    LanguageSelectorComponent
+    LoginFormComponent,
+    SignupFormComponent
   ],
   providers:[KiiLanguageService,TranslateService],
   exports:[
-    HeaderComponent,
-    FooterComponent,
-    ToolbarComponent
-    //LanguageSelectorComponent -> No export as is not used anywhere else
+    LoginFormComponent,
+    SignupFormComponent,
   ]
 })
-export class AppCommonModule { }
+export class AppAuthModule { }
