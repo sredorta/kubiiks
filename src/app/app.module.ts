@@ -46,10 +46,10 @@ import {MatAutocompleteModule,
   //MatBottomSheetRef
 } from '@angular/material';
 import { HomeComponent } from './routes/home/home.component';
-import { StateTransferService } from './services/state-transfer.service';
+import { KiiStateTransferService } from './services/kii-state-transfer.service';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { TranslateHttpLoader } from './utils/translate-http-loader';
+import { KiiTranslateHttpLoader } from './utils/kii-translate-http-loader';
 
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -74,7 +74,7 @@ import { AppCommonModule } from './components/common/app-common.module'; //Conta
           loader: {
               provide: TranslateLoader,
               useFactory: HttpLoaderFactory,
-              deps: [HttpClient, StateTransferService]
+              deps: [HttpClient, KiiStateTransferService]
           }
     }),
     [  MatAutocompleteModule, //MATERIAL DESIGN
@@ -119,10 +119,10 @@ import { AppCommonModule } from './components/common/app-common.module'; //Conta
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(transfer : StateTransferService) {
+  constructor(transfer : KiiStateTransferService) {
       transfer.scroll(); //Handle scroll when transfer server/browser
   }
  }
- export function HttpLoaderFactory(http: HttpClient,transfer: StateTransferService) {
-  return new TranslateHttpLoader(http,transfer);
+ export function HttpLoaderFactory(http: HttpClient,transfer: KiiStateTransferService) {
+  return new KiiTranslateHttpLoader(http,transfer);
 }

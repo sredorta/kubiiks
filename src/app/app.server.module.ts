@@ -9,7 +9,7 @@ import { TransferState, StateKey, makeStateKey } from '@angular/platform-browser
 import { Observable, Observer } from 'rxjs';
 declare var require: any;
 const fs = require('fs');
-import { StateTransferService } from './services/state-transfer.service';
+import { KiiStateTransferService } from './services/kii-state-transfer.service';
 
 
 @NgModule({
@@ -22,7 +22,7 @@ import { StateTransferService } from './services/state-transfer.service';
       loader: {
         provide: TranslateLoader, 
         useFactory: translateFactory,
-        deps: [StateTransferService]
+        deps: [KiiStateTransferService]
       }
     }),
   ],
@@ -31,7 +31,7 @@ import { StateTransferService } from './services/state-transfer.service';
 export class AppServerModule {}
 
 export class TranslateServerLoader implements TranslateLoader {
-  constructor(private transfer : StateTransferService) {}
+  constructor(private transfer : KiiStateTransferService) {}
   public getTranslation(lang: string) : Observable<any> {
    return Observable.create((observer: Observer<any>) => {
      const jsonData = JSON.parse(fs.readFileSync(`./dist/browser/assets/i18n/${lang}.json`, 'utf8'));
@@ -43,6 +43,6 @@ export class TranslateServerLoader implements TranslateLoader {
  }
 }
 
-export function translateFactory(transfer: StateTransferService) {
+export function translateFactory(transfer: KiiStateTransferService) {
  return new TranslateServerLoader(transfer);
 }

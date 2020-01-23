@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
+
+
+//TODO Reduce list to the strict minimum used in common feature components
 import {MatAutocompleteModule,
   MatBadgeModule,
   MatBottomSheetModule,
@@ -43,13 +46,17 @@ import {MatAutocompleteModule,
   //MatDialogRef,
   //MatBottomSheetRef
 } from '@angular/material';
-import { RouterModule } from '@angular/router';
+import { RouterModule} from '@angular/router';
+import { LanguageSelectorComponent } from './language-selector/language-selector.component';
+import { KiiLanguageService} from 'src/app/services/kii-language.service';
+import { TranslateService,TranslateModule } from '@ngx-translate/core';
 
 //Includes the minimal set of components required to show the pages
 
 @NgModule({
   imports: [
     CommonModule,
+    TranslateModule,
     RouterModule,
     [  MatAutocompleteModule, //MATERIAL DESIGN
       MatBadgeModule,
@@ -91,12 +98,19 @@ import { RouterModule } from '@angular/router';
   declarations: [
     HeaderComponent,
     FooterComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    LanguageSelectorComponent
   ],
+  providers:[KiiLanguageService,TranslateService],
   exports:[
     HeaderComponent,
     FooterComponent,
     ToolbarComponent
+    //LanguageSelectorComponent -> No export as is not used anywhere else
   ]
 })
 export class AppCommonModule { }
+/*@Inject(PLATFORM_ID) private _platformId: Object, 
+              @Optional() @Inject(Request) private _request: Request,
+              private _translate:TranslateService, private _router : Router,
+              private _route: ActivatedRoute*/

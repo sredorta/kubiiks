@@ -2,13 +2,13 @@ import {HttpClient} from '@angular/common/http';
 import {TranslateLoader} from '@ngx-translate/core';
 import {Observable, of} from "rxjs";
 import {catchError} from "rxjs/operators";
-import { StateTransferService } from '../services/state-transfer.service';
+import { KiiStateTransferService } from '../services/kii-state-transfer.service';
 
 
-export class TranslateHttpLoader implements TranslateLoader {
+export class KiiTranslateHttpLoader implements TranslateLoader {
   constructor(
     private http: HttpClient,
-    private transfer: StateTransferService,
+    private transfer: KiiStateTransferService,
   ) {}
   
 

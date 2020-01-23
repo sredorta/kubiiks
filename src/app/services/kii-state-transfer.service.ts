@@ -7,7 +7,7 @@ import { TransferState, StateKey, makeStateKey } from '@angular/platform-browser
   providedIn: 'root'
 })
 
-export class StateTransferService {
+export class KiiStateTransferService {
   router : Router;
   viewportScroller : ViewportScroller;
   constructor(
