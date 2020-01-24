@@ -60,3 +60,51 @@ video {
     background-position: bottom left;
     background-size: cover;
 }
+
+.cnt {
+    background:none;
+    position:relative;
+    padding-left:10vw;
+    padding-top:20vh;
+    padding-right:20px;
+    z-index: 6;
+    display:block;
+
+}
+.title {
+    font-size: 32px; 
+    font-weight: normal;
+    opacity:0;
+    margin-bottom:0px;
+    margin-top:0px;
+    color:white;
+    animation: 1s cubic-bezier(0, 0.9, 0.3, 1.2) .2s textAnimationH1 forwards;
+}
+.sub {
+    margin-top:12px;
+    font-size: 18px;
+    font-weight: normal;
+    opacity:0;
+    color:rgba(white,0.6);
+    animation: 1s cubic-bezier(0, 0.9, 0.3, 1.2) .4s textAnimationH2 forwards;
+}
+@keyframes textAnimationH1 {
+    0%   { 
+        opacity:0; 
+        transform:translateY(-100px);
+    }
+    50% {
+        opacity:1;
+    }
+    100% {opacity:1; transform:none;}
+  }
+@keyframes textAnimationH2 {
+    0%   { 
+        opacity:0; 
+        transform:translateY(-100px);
+    }
+    50% {
+        opacity:1;
+    }
+    100% {opacity:1; transform:none;}
+  }     

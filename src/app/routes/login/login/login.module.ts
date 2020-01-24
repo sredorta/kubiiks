@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { LoginRoutingModule } from './login-routing.module';
 import { LoginPageComponent } from '../login-page/login-page.component';
-import { AppAuthModule } from 'src/app/features/auth/app-auth.module';
+import { AppAuthModule } from 'src/app/_features/auth/app-auth.module';
 
 
 @NgModule({

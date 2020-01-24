@@ -9,9 +9,9 @@ import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-transla
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { KiiTranslateBrowserLoader } from './features/common/utils/kii-translate-browser-loader';
+import { KiiTranslateBrowserLoader } from './_features/common/utils/kii-translate-browser-loader';
 import { RouterModule } from '@angular/router';
-import { KiiCommonModule } from './features/common/kii-common.module';
+import { KiiCommonModule } from './_features/common/kii-common.module';
 
 
 @NgModule({
