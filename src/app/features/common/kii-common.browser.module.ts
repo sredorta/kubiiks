@@ -4,10 +4,6 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HeaderComponent } from './components/header/header.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { ToolbarComponent } from './components/toolbar/toolbar.component';
-
 
 //TODO Reduce list to the strict minimum used in common feature components
 import {MatAutocompleteModule,
@@ -50,15 +46,25 @@ import {MatAutocompleteModule,
   //MatDialogRef,
   //MatBottomSheetRef
 } from '@angular/material';
-import { RouterModule} from '@angular/router';
 import { KiiLanguageService} from 'src/app/services/kii-language.service';
-import { TranslateService } from '@ngx-translate/core';
-
+import { TranslateService, TranslateModule, TranslateLoader, TranslateDirective } from '@ngx-translate/core';
+import { KiiHeaderComponent } from './components/kii-header/kii-header.component';
+import { KiiFooterComponent } from './components/kii-footer/kii-footer.component';
+import { KiiToolbarComponent } from './components/kii-toolbar/kii-toolbar.component';
+import { KiiPageComponent } from './components/kii-page/kii-page.component';
+import { KiiLanguageSelectorComponent } from './components/kii-language-selector/kii-language-selector.component';
+import { AppRoutingModule, routes } from 'src/app/app-routing.module';
+import { HomeComponent } from 'src/app/routes/home/home.component';
+import { KiiTranslateBrowserLoader } from './utils/kii-translate-browser-loader';
+import { TransferState } from '@angular/platform-browser';
+import { HttpClient } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule,
+    RouterModule.forChild(routes),
+
     [  MatAutocompleteModule, //MATERIAL DESIGN
       MatBadgeModule,
       MatBottomSheetModule,
@@ -95,18 +101,29 @@ import { TranslateService } from '@ngx-translate/core';
       MatTooltipModule,
       //MatTreeModule
     ],
+    TranslateModule.forChild({
+      loader: {
+          provide: TranslateLoader,
+          useFactory: KiiTranslateBrowserLoader.getFactory('blog'),
+          deps: [HttpClient, TransferState]
+      }
+    }),
+
   ],
   declarations: [
-    HeaderComponent,
-    FooterComponent,
-    ToolbarComponent,
+    HomeComponent,
+    KiiHeaderComponent,
+    KiiFooterComponent,
+    KiiToolbarComponent,
+    KiiPageComponent,
+    KiiLanguageSelectorComponent,
   ],
   providers:[KiiLanguageService,TranslateService],
   exports:[
-    HeaderComponent,
-    FooterComponent,
-    ToolbarComponent
-    //LanguageSelectorComponent -> No export as is not used anywhere else
+    HomeComponent,
+    KiiPageComponent,
+    KiiToolbarComponent
   ]
 })
-export class AppCommonModule { }
+export class KiiCommonBrowserModule { }
+

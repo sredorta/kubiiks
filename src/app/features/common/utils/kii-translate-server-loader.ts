@@ -27,9 +27,9 @@ export class KiiTranslateServerLoader implements TranslateLoader {
    }
 
     /**Returns the Factory for Server */
-    public static getFactory() {
+    public static getFactory(context?:string) {
         return function KiiTranslateServerFactory(transfer: TransferState) {
-            return new KiiTranslateServerLoader(transfer);
+            return new KiiTranslateServerLoader(transfer,context);
         }
     }
   }

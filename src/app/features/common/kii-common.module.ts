@@ -1,11 +1,9 @@
 ////////////////////////////////////////////////////////////////////////////////
-// Includes all components related to auth
+//Includes the minimal set of components required to show the main pages
 ////////////////////////////////////////////////////////////////////////////////
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-
 
 //TODO Reduce list to the strict minimum used in common feature components
 import {MatAutocompleteModule,
@@ -49,16 +47,27 @@ import {MatAutocompleteModule,
   //MatBottomSheetRef
 } from '@angular/material';
 import { KiiLanguageService} from 'src/app/services/kii-language.service';
-import { TranslateService, } from '@ngx-translate/core';
-import { LoginFormComponent } from './login-form/login-form.component';
-import { SignupFormComponent } from './signup-form/signup-form.component';
-import { AppRoutingModule } from 'src/app/app-routing.module';
+import { TranslateService, TranslateModule, TranslateLoader, TranslateDirective } from '@ngx-translate/core';
+import { KiiHeaderComponent } from './components/kii-header/kii-header.component';
+import { KiiFooterComponent } from './components/kii-footer/kii-footer.component';
+import { KiiToolbarComponent } from './components/kii-toolbar/kii-toolbar.component';
+import { KiiPageComponent } from './components/kii-page/kii-page.component';
+import { KiiLanguageSelectorComponent } from './components/kii-language-selector/kii-language-selector.component';
+import { AppRoutingModule, routes } from 'src/app/app-routing.module';
+import { HomeComponent } from 'src/app/routes/home/home.component';
+import { KiiTranslateBrowserLoader } from './utils/kii-translate-browser-loader';
+import { TransferState } from '@angular/platform-browser';
+import { HttpClient } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
+import { KiiTranslateServerLoader } from './utils/kii-translate-server-loader';
+
 
 
 @NgModule({
   imports: [
     CommonModule,
-    AppRoutingModule,
+    RouterModule.forChild(routes),
+
     [  MatAutocompleteModule, //MATERIAL DESIGN
       MatBadgeModule,
       MatBottomSheetModule,
@@ -95,15 +104,29 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
       MatTooltipModule,
       //MatTreeModule
     ],
+    TranslateModule.forChild({
+      loader: {
+          provide: TranslateLoader,
+          useFactory: KiiTranslateServerLoader.getFactory('blog'),
+          deps: [TransferState]
+      }
+    }),
+
   ],
   declarations: [
-    LoginFormComponent,
-    SignupFormComponent
+    HomeComponent,
+    KiiHeaderComponent,
+    KiiFooterComponent,
+    KiiToolbarComponent,
+    KiiPageComponent,
+    KiiLanguageSelectorComponent,
   ],
-  providers:[KiiLanguageService],
+  providers:[KiiLanguageService,TranslateService],
   exports:[
-    LoginFormComponent,
-    SignupFormComponent,
+    HomeComponent,
+    KiiPageComponent,
+    KiiToolbarComponent
   ]
 })
-export class AppAuthModule { }
+export class KiiCommonServerModule { }
+

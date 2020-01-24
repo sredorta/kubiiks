@@ -11,6 +11,8 @@ const fs = require('fs');
 import { KiiStateTransferService } from './services/kii-state-transfer.service';
 import { TransferState } from '@angular/platform-browser';
 import { KiiTranslateServerLoader } from './features/common/utils/kii-translate-server-loader';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { KiiCommonServerModule } from './features/common/kii-common.server.module';
 
 
 
@@ -18,6 +20,8 @@ import { KiiTranslateServerLoader } from './features/common/utils/kii-translate-
   imports: [
     AppModule,
     ServerModule,
+    NoopAnimationsModule,
+    KiiCommonServerModule,
     ServerTransferStateModule,
     ModuleMapLoaderModule,
     TranslateModule.forRoot({
@@ -32,4 +36,35 @@ import { KiiTranslateServerLoader } from './features/common/utils/kii-translate-
 })
 export class AppServerModule {}
 
-
+/*
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    BrowserTransferStateModule,
+    KiiCommonModule, //Common module containing all the shared main elements and home page
+    RouterModule.forChild(routes),
+    //NGX-TRANSLATE PART
+    HttpClientModule,
+    TranslateModule.forRoot({
+          loader: {
+              provide: TranslateLoader,
+              useFactory: KiiTranslateBrowserLoader.getFactory(),
+              deps: [HttpClient, TransferState]
+          }
+    }),
+ 
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+  ],
+  providers: [TranslateService,DeviceDetectorService],
+  bootstrap: [AppComponent],
+})
+export class AppModule {
+  constructor(transfer : KiiStateTransferService) {
+      transfer.scroll(); //Handle scroll when transfer server/browser
+  }
+ }*/

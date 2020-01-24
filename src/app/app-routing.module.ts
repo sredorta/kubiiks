@@ -4,7 +4,7 @@ import { HomeComponent } from './routes/home/home.component';
 
 
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '',
     redirectTo: 'home',
@@ -38,7 +38,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes,{initialNavigation:'enabled'})],//, scrollPositionRestoration:'enabled'})],
+  imports: [RouterModule.forRoot(routes,{initialNavigation:'enabled', enableTracing:true})],//, scrollPositionRestoration:'enabled'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

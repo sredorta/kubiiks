@@ -3,11 +3,11 @@ import {DeviceDetectorService } from 'ngx-device-detector';
 import { isPlatformBrowser } from '@angular/common';
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  selector: 'kii-header',
+  templateUrl: './kii-header.component.html',
+  styleUrls: ['./kii-header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class KiiHeaderComponent implements OnInit {
 
   showVideo:boolean = false;
   video : HTMLVideoElement = null;
