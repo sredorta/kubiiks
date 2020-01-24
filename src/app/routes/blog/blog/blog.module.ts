@@ -5,7 +5,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TransferState } from '@angular/platform-browser';
 import { HttpClient } from '@angular/common/http';
 import { KiiTranslateBrowserLoader } from 'src/app/features/common/utils/kii-translate-browser-loader';
-import { KiiCommonBrowserModule } from 'src/app/features/common/kii-common.browser.module';
+import { KiiCommonModule } from 'src/app/features/common/kii-common.module';
 
 
 @NgModule({
@@ -14,15 +14,9 @@ import { KiiCommonBrowserModule } from 'src/app/features/common/kii-common.brows
   ],
   imports: [
     BlogRoutingModule,
-    KiiCommonBrowserModule,
+    KiiCommonModule,
     //Each Lazy module needs to load it's translation files
-    TranslateModule.forChild({
-      loader: {
-          provide: TranslateLoader,
-          useFactory: KiiTranslateBrowserLoader.getFactory('blog'),
-          deps: [HttpClient, TransferState]
-      }
-    }),
+    TranslateModule
   ]
 })
 export class BlogModule { }

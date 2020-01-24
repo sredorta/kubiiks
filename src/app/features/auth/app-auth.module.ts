@@ -52,13 +52,13 @@ import { KiiLanguageService} from 'src/app/services/kii-language.service';
 import { TranslateService, } from '@ngx-translate/core';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { SignupFormComponent } from './signup-form/signup-form.component';
-import { AppRoutingModule } from 'src/app/app-routing.module';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
   imports: [
     CommonModule,
-    AppRoutingModule,
+    RouterModule,
     [  MatAutocompleteModule, //MATERIAL DESIGN
       MatBadgeModule,
       MatBottomSheetModule,

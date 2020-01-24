@@ -11,7 +11,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { KiiTranslateBrowserLoader } from './features/common/utils/kii-translate-browser-loader';
 import { RouterModule } from '@angular/router';
-import { KiiCommonBrowserModule } from './features/common/kii-common.browser.module';
+import { KiiCommonModule } from './features/common/kii-common.module';
 
 
 @NgModule({
@@ -23,7 +23,7 @@ import { KiiCommonBrowserModule } from './features/common/kii-common.browser.mod
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserTransferStateModule,
-    KiiCommonBrowserModule, //Common module containing all the shared main elements and home page
+    KiiCommonModule, //Common module containing all the shared main elements and home page
     RouterModule.forChild(routes),
     //NGX-TRANSLATE PART
     HttpClientModule,

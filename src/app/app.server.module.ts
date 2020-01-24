@@ -12,7 +12,7 @@ import { KiiStateTransferService } from './services/kii-state-transfer.service';
 import { TransferState } from '@angular/platform-browser';
 import { KiiTranslateServerLoader } from './features/common/utils/kii-translate-server-loader';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { KiiCommonServerModule } from './features/common/kii-common.server.module';
+import { KiiCommonModule } from './features/common/kii-common.module';
 
 
 
@@ -21,7 +21,7 @@ import { KiiCommonServerModule } from './features/common/kii-common.server.modul
     AppModule,
     ServerModule,
     NoopAnimationsModule,
-    KiiCommonServerModule,
+    KiiCommonModule,
     ServerTransferStateModule,
     ModuleMapLoaderModule,
     TranslateModule.forRoot({
