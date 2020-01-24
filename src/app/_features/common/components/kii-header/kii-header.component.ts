@@ -9,27 +9,10 @@ import { isPlatformBrowser } from '@angular/common';
 })
 export class KiiHeaderComponent implements OnInit {
 
-  showVideo:boolean = false;
-  video : HTMLVideoElement = null;
-  isPlaying : boolean = false;
-  canPlayVideo : boolean = false;
-  isMobile : boolean = this.device.isMobile();
-  format : string ="default";
-  @ViewChild('videoPlayer',{static:false}) videoplayer: ElementRef;
-
-  constructor(private device : DeviceDetectorService, @Inject(PLATFORM_ID) private platformId: any) { }
+  constructor() { }
 
   ngOnInit() {
-      this.showVideo = isPlatformBrowser(this.platformId)
+      
   }
-  ngAfterViewInit() {
-    if (this.showVideo) {
-      this.video = this.videoplayer.nativeElement;
-      this.video.oncanplaythrough = () => {
-      }
-      this.video.onplaying = () => {
-        this.isPlaying = true;
-      }
-    }
-  }
+
 }

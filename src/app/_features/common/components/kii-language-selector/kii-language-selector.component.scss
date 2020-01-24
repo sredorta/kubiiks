@@ -1,9 +1,12 @@
-.btn {
+:host {
     height:50px;
     width:50px;
     min-width: 50px;
     max-width: 50px;
+    min-height: 50px;
+    max-height: 50px;
 }
+
 .flag {
     background: url('/assets/kiilib/images/language-flags.svg');
     background-repeat:  no-repeat;

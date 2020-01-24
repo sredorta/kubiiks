@@ -28,6 +28,9 @@ import { KiiPageComponent } from './components/kii-page/kii-page.component';
 import { KiiLanguageSelectorComponent } from './components/kii-language-selector/kii-language-selector.component';
 import { HomeComponent } from 'src/app/routes/home/home.component';
 import { RouterModule } from '@angular/router';
+import { HeaderComponent } from 'src/app/components/header/header.component';
+import { FooterComponent } from 'src/app/components/footer/footer.component';
+import { ToolbarComponent } from 'src/app/components/toolbar/toolbar.component';
 
 
 @NgModule({
@@ -53,8 +56,11 @@ import { RouterModule } from '@angular/router';
   declarations: [
     HomeComponent,
     KiiHeaderComponent,
+    HeaderComponent,
     KiiFooterComponent,
+    FooterComponent,
     KiiToolbarComponent,
+    ToolbarComponent,
     KiiPageComponent,
     KiiLanguageSelectorComponent,
   ],
