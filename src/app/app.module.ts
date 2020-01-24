@@ -1,5 +1,5 @@
 import { BrowserModule, TransferState, BrowserTransferStateModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, Injector, Inject, PLATFORM_ID } from '@angular/core';
 import { AppRoutingModule, routes } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -12,6 +12,7 @@ import { environment } from '../environments/environment';
 import { KiiTranslateBrowserLoader } from './_features/common/utils/kii-translate-browser-loader';
 import { RouterModule } from '@angular/router';
 import { KiiCommonModule } from './_features/common/kii-common.module';
+import { KiiInjectorService } from './_features/common/services/kii-injector.service';
 
 
 @NgModule({
@@ -41,8 +42,10 @@ import { KiiCommonModule } from './_features/common/kii-common.module';
   bootstrap: [AppComponent],
 })
 export class AppModule {
-  constructor(transfer : KiiStateTransferService) {
+  constructor(transfer : KiiStateTransferService,injector:Injector) {
       transfer.scroll(); //Handle scroll when transfer server/browser
+      console.log("Storing injector of app",injector);
+      KiiInjectorService.setInjector(injector)
   }
  }
 

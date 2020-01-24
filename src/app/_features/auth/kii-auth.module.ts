@@ -2,7 +2,7 @@
 // Includes all components related to auth
 ////////////////////////////////////////////////////////////////////////////////
 
-import { NgModule } from '@angular/core';
+import { NgModule, PLATFORM_ID, Injector } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 
@@ -49,16 +49,27 @@ import {MatAutocompleteModule,
   //MatBottomSheetRef
 } from '@angular/material';
 import { KiiLanguageService} from 'src/app/services/kii-language.service';
-import { TranslateService, } from '@ngx-translate/core';
+import { TranslateService, TranslateModule, TranslateLoader, } from '@ngx-translate/core';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { SignupFormComponent } from './signup-form/signup-form.component';
 import { RouterModule } from '@angular/router';
+import { TransferState } from '@angular/platform-browser';
+import { HttpClient } from '@angular/common/http';
+import { KiiTranslateLoader } from '../common/utils/kii-translate-loader';
 
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
+    TranslateModule.forRoot({
+      loader: {
+          provide: TranslateLoader,
+          useFactory: KiiTranslateLoader.getFactory('auth'),
+          deps: [HttpClient, TransferState,PLATFORM_ID, Injector]
+      },
+      isolate:false
+    }),
     [  MatAutocompleteModule, //MATERIAL DESIGN
       MatBadgeModule,
       MatBottomSheetModule,
@@ -106,4 +117,9 @@ import { RouterModule } from '@angular/router';
     SignupFormComponent,
   ]
 })
-export class AppAuthModule { }
+export class KiiAuthModule { }
+/*
+providers:[{provide:'cookieFactory', useFacory: cookieServiceFactory, deps:[PLATFORM_ID, Injector]}]
+const cookieServiceFactory = (platformId: object, injector: Injector) => {
+return isPlatformBrowser(platformId) ? injector.get(BrowserCookieService) : injector.get(ServerCookieService);};
+*/

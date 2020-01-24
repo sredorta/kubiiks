@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { TransferState, StateKey, makeStateKey } from '@angular/platform-browser';
-import { TranslateLoader } from '@ngx-translate/core';
+import { TranslateLoader, TranslateService } from '@ngx-translate/core';
 import {Observable, of, Observer} from "rxjs";
-import {catchError} from "rxjs/operators";
+import {catchError,map} from "rxjs/operators";
+import { KiiInjectorService } from '../services/kii-injector.service';
 
 /**Loads translation from transfer state or from http call */
 export class KiiTranslateBrowserLoader implements TranslateLoader {
@@ -20,7 +21,25 @@ export class KiiTranslateBrowserLoader implements TranslateLoader {
   
     /**Checks if translation is in transfer table if not, get from http */
     public getTranslation(lang: string): Observable<any> {
-      const key: StateKey<number> = makeStateKey<number>('transfer-translate-' + lang);
+      //WA: Issues with for root... This is a workaround !
+      const injector = KiiInjectorService.getInjector();
+      const service = injector.get(TranslateService);
+      if (lang === undefined) {
+
+        console.log(service);
+        lang= service.currentLang;
+        service.getTranslation(lang).subscribe(res => {
+          console.log("WE GOT HERE NOW",res);
+          service.setTranslation(service.currentLang,null);
+          service.setTranslation(service.currentLang,res);
+
+          service.reloadLang(service.currentLang);
+          service.use(service.currentLang);
+        });
+      } else {
+      console.log("InGetTRANSLATION !!!!!!!!!!!!!!!!!!!!!!!", this.context,lang);
+      console.log(service)
+      /*const key: StateKey<number> = makeStateKey<number>('transfer-translate-' + lang);
       const data = this.transferState.get(key, null);
       // First we are looking for the translations in transfer-state, if none found, http load as fallback
       if (data) {
@@ -28,12 +47,11 @@ export class KiiTranslateBrowserLoader implements TranslateLoader {
             observer.next(data);
             observer.complete();
           });
-      } else {
-          const path = "/assets/i18n/" + lang + ".json";
-          return this.http.get(path).pipe(catchError(res => {
-              console.error("Could not find translation file:", path);
-              return of({});
-          }));
+      } else {*/
+          const path = "/assets/i18n/"+this.context+"/" + lang + ".json";
+          console.log("Requestion following file:", path);
+          return this.http.get(path);//console.log(res) ));
+      //}
       }
     }
     

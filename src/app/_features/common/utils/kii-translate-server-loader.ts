@@ -17,7 +17,7 @@ export class KiiTranslateServerLoader implements TranslateLoader {
     }
     public getTranslation(lang: string) : Observable<any> {
      return Observable.create((observer: Observer<any>) => {
-       const jsonData = JSON.parse(fs.readFileSync(`./dist/browser/assets/i18n/${lang}.json`, 'utf8'));
+       const jsonData = JSON.parse(fs.readFileSync(`./dist/browser/assets/i18n/${this.context}/${lang}.json`, 'utf8'));
        // Here we save the translations in the transfer-state to avoid glitch
        const key: StateKey<number> = makeStateKey<number>('transfer-translate-' + lang);
        this.transfer.set(key, jsonData);
