@@ -50,7 +50,7 @@ import {MatAutocompleteModule,
 } from '@angular/material';
 import { RouterModule} from '@angular/router';
 import { KiiLanguageService} from 'src/app/services/kii-language.service';
-import { TranslateService,TranslateModule } from '@ngx-translate/core';
+import { TranslateService, } from '@ngx-translate/core';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { SignupFormComponent } from './signup-form/signup-form.component';
 
@@ -58,7 +58,6 @@ import { SignupFormComponent } from './signup-form/signup-form.component';
 @NgModule({
   imports: [
     CommonModule,
-    TranslateModule,
     RouterModule,
     [  MatAutocompleteModule, //MATERIAL DESIGN
       MatBadgeModule,
@@ -101,7 +100,7 @@ import { SignupFormComponent } from './signup-form/signup-form.component';
     LoginFormComponent,
     SignupFormComponent
   ],
-  providers:[KiiLanguageService,TranslateService],
+  providers:[KiiLanguageService],
   exports:[
     LoginFormComponent,
     SignupFormComponent,

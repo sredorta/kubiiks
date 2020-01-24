@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { SignupRoutingModule } from './signup-routing.module';
 import { SignupPageComponent } from '../signup-page/signup-page.component';
-import { AppAuthModule } from '../../../components/auth/app-auth.module';
+import { AppAuthModule } from 'src/app/features/auth/app-auth.module';
 
 
 @NgModule({

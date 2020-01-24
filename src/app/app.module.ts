@@ -48,13 +48,14 @@ import {MatAutocompleteModule,
 import { HomeComponent } from './routes/home/home.component';
 import { KiiStateTransferService } from './services/kii-state-transfer.service';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
 import { KiiTranslateHttpLoader } from './utils/kii-translate-http-loader';
 
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { AppCommonModule } from './components/common/app-common.module'; //Contains all common modules like footer,header...
+import { KiiTranslateBrowserLoader } from './features/common/utils/kii-translate-browser-loader';
+import { AppCommonModule } from './features/common/app-common.module';
 
 
 @NgModule({
@@ -73,8 +74,8 @@ import { AppCommonModule } from './components/common/app-common.module'; //Conta
     TranslateModule.forRoot({
           loader: {
               provide: TranslateLoader,
-              useFactory: HttpLoaderFactory,
-              deps: [HttpClient, KiiStateTransferService]
+              useFactory: KiiTranslateBrowserLoader.getFactory(),
+              deps: [HttpClient, TransferState]
           }
     }),
     [  MatAutocompleteModule, //MATERIAL DESIGN
@@ -123,6 +124,4 @@ export class AppModule {
       transfer.scroll(); //Handle scroll when transfer server/browser
   }
  }
- export function HttpLoaderFactory(http: HttpClient,transfer: KiiStateTransferService) {
-  return new KiiTranslateHttpLoader(http,transfer);
-}
+

@@ -48,3 +48,15 @@ video {
     min-height: 300px;
     z-index: 4;
 }
+.bottom-decorator {
+    position:absolute;
+    bottom:-2px;
+    left:0;
+    z-index: 6;
+    width:100%;
+    min-height: 80px;
+    background-image: url("/assets/images/header-background.svg");
+    background-repeat: no-repeat;
+    background-position: bottom left;
+    background-size: cover;
+}

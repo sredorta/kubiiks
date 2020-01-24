@@ -1,25 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { KiiLanguageService } from '../../../services/kii-language.service';
+import { KiiLanguageService } from '../../services/kii-language.browser.service';
 import { TranslateService } from '@ngx-translate/core';
 import { KiiBaseAbstract } from 'src/app/abstracts/kii-base.abstract';
 
 @Component({
-  selector: 'app-language-selector',
-  templateUrl: './language-selector.component.html',
-  styleUrls: ['./language-selector.component.scss']
+  selector: 'kii-language-selector',
+  templateUrl: './kii-language-selector.component.html',
+  styleUrls: ['./kii-language-selector.component.scss']
 })
-export class LanguageSelectorComponent extends KiiBaseAbstract implements OnInit {
+export class KiiLanguageSelectorComponent extends KiiBaseAbstract implements OnInit {
 
   currentLanguage : string;
 
-  constructor(private trans:TranslateService, private _kiiApiLanguage : KiiLanguageService ) {
+  constructor(private trans:TranslateService, private _lang : KiiLanguageService ) {
     super();
   }
 
   ngOnInit() {
-    this.currentLanguage = this.getCode(this._kiiApiLanguage.get());
+    this.currentLanguage = this.getCode(this._lang.get());
     this.addSubscriber(
-      this._kiiApiLanguage.onChange().subscribe(lang => {
+      this._lang.onChange.subscribe(lang => {
         this.currentLanguage = this.getCode(lang);
       })
     );
@@ -27,13 +27,13 @@ export class LanguageSelectorComponent extends KiiBaseAbstract implements OnInit
 
   /**Gets the language code from an iso */
   getCode(iso:string) {
-    let lang = this._kiiApiLanguage.getSupportedLanguages().find(obj => obj.iso == iso);
+    let lang = this._lang.getSupportedLanguages().find(obj => obj.iso == iso);
     return lang.code;
   }
 
   /** Returns the supported languages as defined in the environment variables*/
   getSupportedLanguages() {
-    return this._kiiApiLanguage.getSupportedLanguages();
+    return this._lang.getSupportedLanguages();
   }
 
   //Sets a language to the element
@@ -59,7 +59,7 @@ export class LanguageSelectorComponent extends KiiBaseAbstract implements OnInit
 
   /**Selects language when user clicks on a flag */
   selectLanguage(iso:string) {
-    this._kiiApiLanguage.set(iso);
+    this._lang.set(iso);
     this.currentLanguage = this.getCode(iso); 
   }
 

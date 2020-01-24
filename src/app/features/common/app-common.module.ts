@@ -4,9 +4,9 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
-import { ToolbarComponent } from './toolbar/toolbar.component';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
 
 
 //TODO Reduce list to the strict minimum used in common feature components
@@ -51,15 +51,13 @@ import {MatAutocompleteModule,
   //MatBottomSheetRef
 } from '@angular/material';
 import { RouterModule} from '@angular/router';
-import { LanguageSelectorComponent } from './language-selector/language-selector.component';
 import { KiiLanguageService} from 'src/app/services/kii-language.service';
-import { TranslateService,TranslateModule } from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @NgModule({
   imports: [
     CommonModule,
-    TranslateModule,
     RouterModule,
     [  MatAutocompleteModule, //MATERIAL DESIGN
       MatBadgeModule,
@@ -102,7 +100,6 @@ import { TranslateService,TranslateModule } from '@ngx-translate/core';
     HeaderComponent,
     FooterComponent,
     ToolbarComponent,
-    LanguageSelectorComponent
   ],
   providers:[KiiLanguageService,TranslateService],
   exports:[
