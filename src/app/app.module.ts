@@ -9,10 +9,10 @@ import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-transla
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { KiiTranslateBrowserLoader } from './_features/common/utils/kii-translate-browser-loader';
 import { RouterModule } from '@angular/router';
 import { KiiCommonModule } from './_features/common/kii-common.module';
 import { KiiInjectorService } from './_features/common/services/kii-injector.service';
+import { KiiTranslateLoader } from './_features/common/utils/kii-translate-loader';
 
 
 @NgModule({
@@ -31,7 +31,7 @@ import { KiiInjectorService } from './_features/common/services/kii-injector.ser
     TranslateModule.forRoot({
           loader: {
               provide: TranslateLoader,
-              useFactory: KiiTranslateBrowserLoader.getFactory(),
+              useFactory: KiiTranslateLoader.getFactory(),
               deps: [HttpClient, TransferState]
           }
     }),

@@ -25,16 +25,13 @@ export const routes: Routes = [
     loadChildren : () => import('./routes/contact/contact/contact.module').then(m => m.ContactModule), 
     pathMatch: 'full'
   },
+  //Load auth module
   {
-    path: 'login',
-    loadChildren : () => import('./routes/login/login/login.module').then(m => m.LoginModule), 
-    pathMatch: 'full'
+    path: 'auth',
+    //loadChildren : () => import('./routes/login/login/login.module').then(m => m.LoginModule), 
+    loadChildren : () => import('./_features/auth/kii-auth.module').then(m => m.KiiAuthModule), 
   },
-  {
-    path: 'signup',
-    loadChildren : () => import('./routes/signup/signup/signup.module').then(m => m.SignupModule), 
-    pathMatch: 'full'
-  }
+
 ];
 
 @NgModule({

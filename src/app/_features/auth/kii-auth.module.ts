@@ -56,16 +56,23 @@ import { RouterModule } from '@angular/router';
 import { TransferState } from '@angular/platform-browser';
 import { HttpClient } from '@angular/common/http';
 import { KiiTranslateLoader } from '../common/utils/kii-translate-loader';
+import { KiiTranslateLazyLoader } from '../common/utils/kii-translate-lazy-loader';
+import { KiiLoginComponent } from './routes/kii-login/kii-login.component';
+import { KiiCommonModule } from '../common/kii-common.module';
+import { KiiAuthRoutingModule } from './kii-auth-routing.module';
+import { KiiSignupComponent } from './routes/kii-signup/kii-signup.component';
 
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
-    TranslateModule.forRoot({
+    KiiCommonModule,
+    KiiAuthRoutingModule,
+    TranslateModule.forChild({
       loader: {
           provide: TranslateLoader,
-          useFactory: KiiTranslateLoader.getFactory('auth'),
+          useFactory: KiiTranslateLazyLoader.getFactory('auth'),
           deps: [HttpClient, TransferState,PLATFORM_ID, Injector]
       },
       isolate:false
@@ -109,12 +116,12 @@ import { KiiTranslateLoader } from '../common/utils/kii-translate-loader';
   ],
   declarations: [
     LoginFormComponent,
-    SignupFormComponent
+    SignupFormComponent,
+    KiiLoginComponent,
+    KiiSignupComponent
   ],
   providers:[KiiLanguageService],
   exports:[
-    LoginFormComponent,
-    SignupFormComponent,
   ]
 })
 export class KiiAuthModule { }

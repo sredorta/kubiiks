@@ -10,9 +10,9 @@ declare var require: any;
 const fs = require('fs');
 import { KiiStateTransferService } from './services/kii-state-transfer.service';
 import { TransferState } from '@angular/platform-browser';
-import { KiiTranslateServerLoader } from './_features/common/utils/kii-translate-server-loader';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { KiiCommonModule } from './_features/common/kii-common.module';
+import { KiiTranslateLoader } from './_features/common/utils/kii-translate-loader';
 
 
 
@@ -27,7 +27,7 @@ import { KiiCommonModule } from './_features/common/kii-common.module';
     TranslateModule.forRoot({
       loader: {
           provide: TranslateLoader,
-          useFactory: KiiTranslateServerLoader.getFactory(),
+          useFactory: KiiTranslateLoader.getFactory(),
           deps: [TransferState]
       }
 }),
