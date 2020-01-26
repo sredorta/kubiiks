@@ -7,8 +7,6 @@ import { ModuleMapLoaderModule } from '@nguniversal/module-map-ngfactory-loader'
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { KiiCommonModule } from './_features/common/kii-common.module';
 import { TransferState } from '@angular/platform-browser';
-import { KiiStateTransferService } from './_features/common/services/kii-state-transfer.service';
-import { KiiInjectorService } from './_features/common/services/kii-injector.service';
 
 
 
@@ -24,8 +22,4 @@ import { KiiInjectorService } from './_features/common/services/kii-injector.ser
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppServerModule {
-  constructor(transfer : KiiStateTransferService) {
-    transfer.scroll(); //Handle scroll when transfer server/browser
-  }
-}
+export class AppServerModule {}

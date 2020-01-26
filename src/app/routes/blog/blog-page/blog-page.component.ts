@@ -9,10 +9,11 @@ import { Router } from '@angular/router';
 })
 export class BlogPageComponent implements OnInit {
 
-  constructor(private trans: KiiLanguageService, private router: Router) { }
+  constructor(private kiiLang: KiiLanguageService, private router: Router) { }
 
   ngOnInit() {
     console.log("ONINIT");
+    this.kiiLang.setRequiredContext(['main']);
   }
 
 }

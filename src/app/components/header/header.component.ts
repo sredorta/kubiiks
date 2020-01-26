@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, PLATFORM_ID, Inject } from '@angular/core';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { isPlatformBrowser } from '@angular/common';
+import { KiiViewTransferService } from 'src/app/_features/common/services/kii-view-transfer.service';
 
 @Component({
   selector: 'app-header',
@@ -15,12 +16,11 @@ export class HeaderComponent implements OnInit {
   canPlayVideo : boolean = false;
   isMobile : boolean = this.device.isMobile();
   format : string ="default";
+  isTransfer : boolean = this.transfer.isTransfer;
 
-  params = {test1:'lolo', test2:'lili'};
-  
   @ViewChild('videoPlayer',{static:false}) videoplayer: ElementRef;
 
-  constructor(private device : DeviceDetectorService, @Inject(PLATFORM_ID) private platformId: any) { }
+  constructor(private device : DeviceDetectorService, @Inject(PLATFORM_ID) private platformId: any, private transfer: KiiViewTransferService) { }
 
   ngOnInit() {
       this.showVideo = isPlatformBrowser(this.platformId)

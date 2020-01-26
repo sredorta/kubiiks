@@ -20,7 +20,13 @@ export class KiiTranslatePipe implements PipeTransform {
   getFromTranslation(key:string,args:any[]) {
     if (!args.length) return this.trans.translations[this.trans.getCurrent()][key];
     //Do replacement, we only accept one parameter with object
-    if (args.length!=1) console.error("Wrong format only one parameter accepted as an object:  key | translate:param "); 
+    if (args.length!=1) {
+      console.error("Wrong format only one parameter accepted as an object:  key | translate:param "); 
+      return this.trans.translations[this.trans.getCurrent()][key];
+    }
+    if (args[0]===undefined) {
+      return this.trans.translations[this.trans.getCurrent()][key];
+    }
     let str :string = this.trans.translations[this.trans.getCurrent()][key];
     for (let [key, value] of Object.entries(args[0])) {
       let regex = new RegExp("\{\{"+key +"\}\}");

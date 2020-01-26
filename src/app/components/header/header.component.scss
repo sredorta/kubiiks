@@ -74,19 +74,27 @@ video {
 .title {
     font-size: 32px; 
     font-weight: normal;
-    opacity:0;
     margin-bottom:0px;
     margin-top:0px;
     color:white;
-    animation: 1s cubic-bezier(0, 0.9, 0.3, 1.2) .2s textAnimationH1 forwards;
 }
 .sub {
     margin-top:12px;
     font-size: 18px;
     font-weight: normal;
-    opacity:0;
     color:rgba(white,0.6);
-    animation: 1s cubic-bezier(0, 0.9, 0.3, 1.2) .4s textAnimationH2 forwards;
+}
+
+//Enable animations if we are not in transfer
+.wrp:not(.is-transfer) {
+    .title {
+        opacity:0;
+        animation: 1s cubic-bezier(0, 0.9, 0.3, 1.2) .2s textAnimationH1 forwards;
+    }
+    .sub {
+        opacity:0;
+        animation: 1s cubic-bezier(0, 0.9, 0.3, 1.2) .4s textAnimationH2 forwards;
+    }
 }
 @keyframes textAnimationH1 {
     0%   { 

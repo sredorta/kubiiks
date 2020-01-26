@@ -30,16 +30,15 @@ import { HeaderComponent } from 'src/app/components/header/header.component';
 import { FooterComponent } from 'src/app/components/footer/footer.component';
 import { ToolbarComponent } from 'src/app/components/toolbar/toolbar.component';
 import { KiiLanguageService } from './services/kii-language.service';
-import { KiiStateTransferService } from './services/kii-state-transfer.service';
 import { KiiInjectorService } from './services/kii-injector.service';
 import { KiiTranslatePipe } from './pipes/kii-translate.pipe';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { KiiViewTransferService } from './services/kii-view-transfer.service';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
-
     [  
       MatBottomSheetModule,
       MatButtonModule,
@@ -64,9 +63,9 @@ import { DeviceDetectorService } from 'ngx-device-detector';
     KiiToolbarComponent,
     ToolbarComponent,
     KiiPageComponent,
-    KiiLanguageSelectorComponent,
+    KiiLanguageSelectorComponent
   ],
-  providers:[DeviceDetectorService,KiiStateTransferService,KiiInjectorService],
+  providers:[DeviceDetectorService,KiiInjectorService,KiiLanguageService, KiiViewTransferService],
   exports:[
     HomeComponent,
     KiiPageComponent,
@@ -75,8 +74,9 @@ import { DeviceDetectorService } from 'ngx-device-detector';
   ]
 })
 export class KiiCommonModule { 
-  constructor(injector:Injector,private kiiLang : KiiLanguageService) {
+  constructor(injector:Injector, private transfer: KiiViewTransferService) {
     KiiInjectorService.setInjector(injector); //Store the injector so that we can access it later
-
+    this.transfer.scroll(); //Handle scroll when transfer server/browser
   }
+
 }

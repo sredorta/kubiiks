@@ -8,9 +8,11 @@ import { KiiLanguageService } from 'src/app/_features/common/services/kii-langua
 })
 export class ContactPageComponent implements OnInit {
 
-  constructor(private trans: KiiLanguageService) { }
+  constructor(private kiiLang: KiiLanguageService) { }
 
   ngOnInit() {
+    this.kiiLang.setRequiredContext(['main']);
+
   }
 
 }

@@ -8,8 +8,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { RouterModule } from '@angular/router';
 import { KiiCommonModule } from './_features/common/kii-common.module';
-import { KiiStateTransferService } from './_features/common/services/kii-state-transfer.service';
-import { KiiInjectorService } from './_features/common/services/kii-injector.service';
+import { KiiLanguageService } from './_features/common/services/kii-language.service';
 
 
 @NgModule({
@@ -30,9 +29,5 @@ import { KiiInjectorService } from './_features/common/services/kii-injector.ser
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-  constructor(transfer : KiiStateTransferService) {
-      transfer.scroll(); //Handle scroll when transfer server/browser
-  }
- }
+export class AppModule {}
 
