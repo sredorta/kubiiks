@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef, ApplicationRef } from '@angular/core';
 import { KiiLanguageService } from './_features/common/services/kii-language.service';
 
 @Component({
@@ -11,6 +11,7 @@ export class AppComponent {
   constructor() {}
 
   ngOnInit() {
+
 
   }
 }

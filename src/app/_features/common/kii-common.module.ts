@@ -2,7 +2,7 @@
 //Includes the minimal set of components required to show the main pages
 ////////////////////////////////////////////////////////////////////////////////
 
-import { NgModule, PLATFORM_ID, Injector } from '@angular/core';
+import { NgModule, PLATFORM_ID, Injector, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 //TODO Reduce list to the strict minimum used in common feature components
@@ -77,5 +77,6 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 export class KiiCommonModule { 
   constructor(injector:Injector,private kiiLang : KiiLanguageService) {
     KiiInjectorService.setInjector(injector); //Store the injector so that we can access it later
+
   }
 }

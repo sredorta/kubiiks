@@ -15,6 +15,9 @@ export class HeaderComponent implements OnInit {
   canPlayVideo : boolean = false;
   isMobile : boolean = this.device.isMobile();
   format : string ="default";
+
+  params = {test1:'lolo', test2:'lili'};
+  
   @ViewChild('videoPlayer',{static:false}) videoplayer: ElementRef;
 
   constructor(private device : DeviceDetectorService, @Inject(PLATFORM_ID) private platformId: any) { }

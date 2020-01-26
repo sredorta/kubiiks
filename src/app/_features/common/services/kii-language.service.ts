@@ -1,4 +1,4 @@
-import { Optional, Inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { Optional, Inject, Injectable, PLATFORM_ID, ChangeDetectorRef, ApplicationRef } from '@angular/core';
 import { REQUEST } from '@nguniversal/express-engine/tokens';
 import { environment } from '../../../../environments/environment';
 import { Observable,of, forkJoin, Subject } from 'rxjs';
