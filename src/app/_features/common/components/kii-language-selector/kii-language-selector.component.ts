@@ -16,7 +16,7 @@ export class KiiLanguageSelectorComponent extends KiiBaseAbstract implements OnI
   }
 
   ngOnInit() {
-    this.currentLanguage = this.getCode(this._lang.get());
+    this.currentLanguage = this.getCode(this._lang.getCurrent());
     this.addSubscriber(
       this._lang.onChange.subscribe(lang => {
         this.currentLanguage = this.getCode(lang);

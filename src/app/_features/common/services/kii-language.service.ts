@@ -1,16 +1,12 @@
-
 import { Optional, Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { REQUEST } from '@nguniversal/express-engine/tokens';
-import { map } from 'rxjs/operators';
 import { environment } from '../../../../environments/environment';
-import { Observable,of, forkJoin, BehaviorSubject, Subject } from 'rxjs';
+import { Observable,of, forkJoin, Subject } from 'rxjs';
 import {catchError} from 'rxjs/operators';
-import { isPlatformBrowser, CommonModule } from '@angular/common';
+import { isPlatformBrowser} from '@angular/common';
 import { StateKey, makeStateKey, TransferState } from '@angular/platform-browser';
 import { HttpClient } from '@angular/common/http';
-import { KiiInjectorService } from './kii-injector.service';
-import { KiiTranslatePipe } from '../pipes/kii-translate.pipe';
-import { KiiCommonModule } from '../kii-common.module';
+
 declare var require: any;
 const fs = require('fs');
 
@@ -24,7 +20,7 @@ export interface IKiiLanguage  {
 })
 export  class KiiLanguageService  {
   /**Observable that returns current language changes */  
-  public onChange = new BehaviorSubject<string>(environment.languages[0]);
+  public onChange = new Subject<string>();
 
   /**Observable that changes when loading process is completed */
   public onLoaded = new Subject<boolean>();
@@ -32,7 +28,7 @@ export  class KiiLanguageService  {
   private _onLoaded : boolean = false;
   
   /**Current language in utilization, set by default already */
-  private currentLang : string = environment.languages[0];
+  private currentLang : string;
 
 
   /**Contains the current loaded contexts */
@@ -68,15 +64,15 @@ export  class KiiLanguageService  {
     private transfer : TransferState,
     private http: HttpClient,
     ) { 
-        
+        this.currentLang = this.get();
     }
 
-  /**Selects current language */
+
+  /**Changes language */
   public changeLanguage(lang:string) {
     this.currentLang = this.sanitize(lang);
     console.log("LANGUAGE SET:", this.currentLang);
     this.loadTranslation(this.requiredContext,true);
-
   }
 
 
@@ -136,6 +132,8 @@ export  class KiiLanguageService  {
 
   /**Sets the required context for the module */
   public setRequiredContext(context:string[]) {
+    this.getLangFromBrowser();
+
     this.requiredContext = context;
     console.log("REQUIRED: ",this.requiredContext);
     this.loadTranslation(context);
@@ -214,7 +212,7 @@ export  class KiiLanguageService  {
   }
 
   /**Checks if translation is in transfer table if not, get from http */
-  public getTranslation(lang: string) {
+  private getTranslation(lang: string) {
     console.log("Translations",this.translations);
     if (this.translations[lang]) return this.translations[lang];
     return {};
@@ -223,42 +221,64 @@ export  class KiiLanguageService  {
 
 
 
+  /**Returns browser lang and if not supported the default */
+  private getLangFromBrowser() {
+    if (typeof window === 'undefined' || typeof window.navigator === 'undefined') {
+      return environment.languages[0];
+    }
+
+    let browserLang: any = window.navigator.languages ? window.navigator.languages[0] : null;
+    browserLang = browserLang || window.navigator.language;
+
+    if (browserLang.indexOf('-') !== -1) {
+      browserLang = browserLang.split('-')[0];
+    }
+
+    if (browserLang.indexOf('_') !== -1) {
+      browserLang = browserLang.split('_')[0];
+    }
+    console.log("RETURNING BROWSER LANG", this.sanitize(browserLang));
+    return this.sanitize(browserLang);
+  }
+
+  /**Returns lang based on request headers */
+  private getLangFromRequest() {
+    return 'fr';
+    /*
+       //Gets from url if exists in url
+       const found = this._request.url.match(/\/[a-z][a-z]\//g);
+       if (found) {
+         if (found[0]) {
+           return found[0].replace(/\//gi, '');
+         }
+       }
+       //In case of oauth2 is better to use the referrer to get the language
+       if (this._request.headers['referer']) {
+         const foundReferrer = this._request.headers['referer'].match(/\/[a-z][a-z]\//g);
+         if (foundReferrer) {
+           if (foundReferrer[0]) {
+             return foundReferrer[0].replace(/\//gi, '');
+           }
+         }
+       }
+       //Returns from headers
+       let headerLang = environment.languages[0];
+       try {
+         headerLang = this._request.headers['accept-language'].substring(0, 2);
+       if (environment.languages.indexOf(headerLang)<0) headerLang = environment.languages[0];
+       } catch(error) {
+         headerLang = environment.languages[0];
+       }
+       return headerLang;*/
+  }
 
 
-
-
-  public get() {
+  /**Returns language that should be used initially */
+  private get() {
     if (isPlatformBrowser(this.platform)) {
-        if (localStorage.getItem("LOCALIZE_DEFAULT_LANGUAGE")) return localStorage.getItem("LOCALIZE_DEFAULT_LANGUAGE");
-        let lang = environment.languages[0];//this._translate.currentLang;
-        if (!lang) lang = environment.languages[0];
-        return lang; 
+      return this.getLangFromBrowser();
     } else {
-        //Gets from url if exists in url
-        const found = this._request.url.match(/\/[a-z][a-z]\//g);
-        if (found) {
-          if (found[0]) {
-            return found[0].replace(/\//gi, '');
-          }
-        }
-        //In case of oauth2 is better to use the referrer to get the language
-        if (this._request.headers['referer']) {
-          const foundReferrer = this._request.headers['referer'].match(/\/[a-z][a-z]\//g);
-          if (foundReferrer) {
-            if (foundReferrer[0]) {
-              return foundReferrer[0].replace(/\//gi, '');
-            }
-          }
-        }
-        //Returns from headers
-        let headerLang = environment.languages[0];
-        try {
-          headerLang = this._request.headers['accept-language'].substring(0, 2);
-        if (environment.languages.indexOf(headerLang)<0) headerLang = environment.languages[0];
-        } catch(error) {
-          headerLang = environment.languages[0];
-        }
-        return headerLang;
+      return this.getLangFromRequest();
     }
   }
 }
