@@ -35,7 +35,6 @@ import { KiiInjectorService } from './services/kii-injector.service';
 import { KiiTranslatePipe } from './pipes/kii-translate.pipe';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { KiiViewTransferService } from './services/kii-view-transfer.service';
-import { KiiAppComponent } from './components/kii-app/kii-app.component';
 import { KiiBottomSheetCookiesComponent } from './components/kii-bottom-sheet-cookies/kii-bottom-sheet-cookies.component';
 
 @NgModule({
@@ -58,7 +57,6 @@ import { KiiBottomSheetCookiesComponent } from './components/kii-bottom-sheet-co
   ],
   declarations: [
     KiiTranslatePipe,
-    KiiAppComponent,
     HomeComponent,
     KiiHeaderComponent,
     HeaderComponent,
@@ -73,11 +71,14 @@ import { KiiBottomSheetCookiesComponent } from './components/kii-bottom-sheet-co
   providers:[DeviceDetectorService,KiiInjectorService,KiiLanguageService, KiiViewTransferService],
   entryComponents:[KiiBottomSheetCookiesComponent],
   exports:[
-    KiiAppComponent,
     HomeComponent,
     KiiPageComponent,
     KiiToolbarComponent,
     KiiTranslatePipe
   ]
 })
-export class KiiCommonModule { }
+export class KiiCommonModule { 
+  constructor(injector:Injector) {
+    KiiInjectorService.setInjector(injector); //Store the injector so that we can access it later
+  }
+}

@@ -7,6 +7,7 @@ import { ModuleMapLoaderModule } from '@nguniversal/module-map-ngfactory-loader'
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { KiiCommonModule } from './_features/common/kii-common.module';
 import { TransferState } from '@angular/platform-browser';
+import { KiiInjectorService } from './_features/common/services/kii-injector.service';
 
 
 
@@ -22,4 +23,6 @@ import { TransferState } from '@angular/platform-browser';
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppServerModule {}
+export class AppServerModule {
+
+}

@@ -147,7 +147,8 @@ export  class KiiLanguageService  {
         for (let ctx of context) {
           //If context already available do nothing
           if (this.isContextAvailable(ctx)) {
-            console.log("Context already available")
+            console.log("Context already available");
+            console.log(this);
           } else {
             //Load context
             console.log("Loading context data: ", ctx) 

@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { KiiLanguageService } from 'src/app/_features/common/services/kii-language.service';
+import { KiiFeatureAbstract } from 'src/app/abstracts/kii-feature.abstract';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent extends KiiFeatureAbstract  implements OnInit {
 
-  constructor(private kiiLang: KiiLanguageService) { }
+  constructor() { super(['main']); }
 
   ngOnInit() {
-    console.log("ON INIT HOME !");
-    this.kiiLang.setRequiredContext(['main']);
+    this.init();
   }
 
   /*switch() {

@@ -9,6 +9,7 @@ import { environment } from '../environments/environment';
 import { RouterModule } from '@angular/router';
 import { KiiCommonModule } from './_features/common/kii-common.module';
 import { KiiLanguageService } from './_features/common/services/kii-language.service';
+import { KiiInjectorService } from './_features/common/services/kii-injector.service';
 
 
 @NgModule({
@@ -29,5 +30,7 @@ import { KiiLanguageService } from './_features/common/services/kii-language.ser
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+
+}
 

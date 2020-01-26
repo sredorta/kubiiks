@@ -16,9 +16,9 @@ import { CommonModule } from '@angular/common';
   imports: [
     CommonModule,
     RouterModule,
-    BlogRoutingModule,
     KiiCommonModule,
+    BlogRoutingModule,
     //Each Lazy module needs to load it's translation files
-  ]
+  ],
 })
 export class BlogModule { }
