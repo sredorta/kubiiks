@@ -24,7 +24,7 @@ export interface IKiiLanguage  {
 })
 export  class KiiLanguageService  {
   /**Observable that returns current language changes */  
-  public onChange : Observable<string>;
+  public onChange = new BehaviorSubject<string>(environment.languages[0]);
 
   /**Observable that changes when loading process is completed */
   public onLoaded = new Subject<boolean>();
@@ -34,11 +34,12 @@ export  class KiiLanguageService  {
   /**Current language in utilization, set by default already */
   private currentLang : string = environment.languages[0];
 
-  /**Context of the translations */
-  public context:string = "main";
 
   /**Contains the current loaded contexts */
-  private contextLoaded:string[] = [];
+  public contextLoaded:any = {};
+
+  /**Contains the language context required so that when we change language we load any missing context */
+  public requiredContext:string[] = ['main'];
 
   /**Contains the current translations table per language */
   public translations:any = {};
@@ -67,13 +68,15 @@ export  class KiiLanguageService  {
     private transfer : TransferState,
     private http: HttpClient,
     ) { 
-        this.onChange = of('fr');
+        
     }
 
   /**Selects current language */
-  public use(lang:string) {
-    console.log("NEW: Using language:",this.sanitize('en'));
+  public changeLanguage(lang:string) {
     this.currentLang = this.sanitize(lang);
+    console.log("LANGUAGE SET:", this.currentLang);
+    this.loadTranslation(this.requiredContext,true);
+
   }
 
 
@@ -114,60 +117,68 @@ export  class KiiLanguageService  {
       return environment.languages[0];
   }
 
-  /**Sets current translations context */
-  setContext(context:string) {
-    this.context=context;
-  }
-
-  /**Gets current context */
-  private getContext() {
-      return this.context;
-  }
-  private static getContextName(contextName:string,lang:string) {
-    return contextName + '-'+lang;
-  }
 
   /**Creates context item */
   private createContext(contextName:string) {
-    if (!this.isContextAvailable(KiiLanguageService.getContextName(contextName,this.currentLang))) this.contextLoaded.push(KiiLanguageService.getContextName(contextName,this.currentLang));
+    if (!this.contextLoaded[this.currentLang])
+        this.contextLoaded[this.currentLang] = [];
+    if (!this.isContextAvailable(contextName))
+        this.contextLoaded[this.currentLang].push(contextName);     
   }
 
   /**Checks if the context is already been loaded */
   private isContextAvailable(context:string) {
-      return this.contextLoaded.indexOf(context)>-1?true:false;
+    if (!this.contextLoaded[this.currentLang])
+      return false;
+    else
+      return this.contextLoaded[this.currentLang].indexOf(context)>-1?true:false;  
+  }
+
+  /**Sets the required context for the module */
+  public setRequiredContext(context:string[]) {
+    this.requiredContext = context;
+    console.log("REQUIRED: ",this.requiredContext);
+    this.loadTranslation(context);
   }
 
   /**Loads the contexts that are required for the module */
-  loadTranslation(context:string[]) : Observable<any> {
-      console.log("loadTranslation",context);
-      let wait :Observable<any>[] = [];
-      for (let ctx of context) {
-        //If context already available do nothing
-        if (this.isContextAvailable(KiiLanguageService.getContextName(ctx, this.currentLang))) {
-          console.log("Context already available")
-          return of({});
+  private loadTranslation(context:string[], isLanguageChange:boolean = false)  {
+        //Loads any missing context
+        let wait :Observable<any>[] = [];
+        console.log("loadTranslation !!!!!!!!!!! start")
+        for (let ctx of context) {
+          //If context already available do nothing
+          if (this.isContextAvailable(ctx)) {
+            console.log("Context already available")
+          } else {
+            //Load context
+            console.log("Loading context data: ", ctx) 
+            if (isPlatformBrowser(this.platform))  
+              wait.push(this.loadContextFromHttp(ctx));
+            else
+              wait.push(this.loadContextFromFile(ctx));
+          }
         }
-        //Load context
-        console.log("Loading context data", KiiLanguageService.getContextName(ctx, this.currentLang) )
-        if (isPlatformBrowser(this.platform))  
-          wait.push(this.loadContextFromHttp(ctx));
-        else
-          wait.push(this.loadContextFromFile(ctx));
-      }
-      forkJoin(wait).subscribe(results => {
-        for (let res of results) {
-            if (!this.translations[this.currentLang]) this.translations[this.currentLang] = res;
-            else this.translations[this.currentLang] = Object.assign({},this.translations[this.currentLang],res);
-        }
-        //Notify pipes that we have completed loading
-        this.onLoaded.next(!this._onLoaded);
-
-      })
+        for (let ctx of context) { this.createContext(ctx); }
+        console.log("!!!!!!!!!!!!!!!!!!!!!!loadTranslation end");
+        forkJoin(wait).subscribe(results => {
+            for (let res of results) {
+                if (!this.translations[this.currentLang]) this.translations[this.currentLang] = res;
+                else this.translations[this.currentLang] = Object.assign({},this.translations[this.currentLang],res);
+            }
+            //Notify pipes that we have completed loading
+            console.log("LOADED TRANS",this.translations);
+            this.onLoaded.next(!this._onLoaded);
+            if (isLanguageChange) {
+              console.log("LANGUAGE CHANGE SENDING");
+              this.onChange.next(this.currentLang);
+            }
+        })
   }
 
   /**Loads the context from the TransferState if exists */
   private loadContextFromTrasferState(contextName:string):Observable<any> {
-    const key: StateKey<number> = makeStateKey<number>('transfer-' + KiiLanguageService.getContextName(contextName,this.currentLang));
+    const key: StateKey<number> = makeStateKey<number>('transfer-' + contextName + this.currentLang);
     const data = this.transfer.get(key, null);
     if (data) console.log("LOADED FROM STATETABLE !!!!",data);
     return data;
@@ -176,8 +187,8 @@ export  class KiiLanguageService  {
 
   /**Loads context from a file and saves it in the state transfer */
   private loadContextFromFile(contextName:string) :Observable<any> {
-    const key: StateKey<number> = makeStateKey<number>('transfer-' + KiiLanguageService.getContextName(contextName,this.currentLang));
-    const data = JSON.parse(fs.readFileSync(`./dist/browser/assets/i18n/${contextName}/${this.currentLang}.json`, 'utf8'));
+    const key: StateKey<number> = makeStateKey<number>('transfer-' +contextName + this.currentLang);
+    const data = JSON.parse(fs.readFileSync(`./dist/browser/assets/i18n/${this.currentLang}/${contextName}.json`, 'utf8'));
     this.transfer.set(key, data);
     if (data)
       return Observable.create(observer => {
@@ -195,7 +206,7 @@ export  class KiiLanguageService  {
         observer.complete();
       });
     else {  
-      const path = "/assets/i18n/"+contextName + "/" + this.currentLang+ ".json";
+      const path = "/assets/i18n/"+this.currentLang + "/" + contextName + ".json";
       return this.http.get(path).pipe(catchError(res => {
         return of({});
       }));

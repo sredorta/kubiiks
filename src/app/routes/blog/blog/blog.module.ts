@@ -4,6 +4,9 @@ import { BlogPageComponent } from '../blog-page/blog-page.component';
 import { TransferState } from '@angular/platform-browser';
 import { HttpClient } from '@angular/common/http';
 import { KiiCommonModule } from 'src/app/_features/common/kii-common.module';
+import { KiiLanguageService } from 'src/app/_features/common/services/kii-language.service';
+import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -11,6 +14,8 @@ import { KiiCommonModule } from 'src/app/_features/common/kii-common.module';
     BlogPageComponent,
   ],
   imports: [
+    CommonModule,
+    RouterModule,
     BlogRoutingModule,
     KiiCommonModule,
     //Each Lazy module needs to load it's translation files

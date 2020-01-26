@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { KiiLanguageService } from 'src/app/_features/common/services/kii-language.service';
 
 @Component({
   selector: 'app-contact-page',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContactPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private trans: KiiLanguageService) { }
 
   ngOnInit() {
   }

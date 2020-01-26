@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { KiiLanguageService } from 'src/app/_features/common/services/kii-language.service';
 
 @Component({
   selector: 'app-kii-login',
@@ -7,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class KiiLoginComponent implements OnInit {
 
-  constructor() { }
+  constructor(private kiiLang:KiiLanguageService) {
+    this.kiiLang.setRequiredContext(['main','auth']);
+
+   }
 
   ngOnInit() {
   }

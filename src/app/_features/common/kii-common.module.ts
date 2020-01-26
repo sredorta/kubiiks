@@ -66,7 +66,7 @@ import { DeviceDetectorService } from 'ngx-device-detector';
     KiiPageComponent,
     KiiLanguageSelectorComponent,
   ],
-  providers:[DeviceDetectorService,KiiLanguageService,KiiStateTransferService,KiiInjectorService],
+  providers:[DeviceDetectorService,KiiStateTransferService,KiiInjectorService],
   exports:[
     HomeComponent,
     KiiPageComponent,
@@ -75,7 +75,7 @@ import { DeviceDetectorService } from 'ngx-device-detector';
   ]
 })
 export class KiiCommonModule { 
-  constructor(injector:Injector) {
+  constructor(injector:Injector,private kiiLang : KiiLanguageService) {
     KiiInjectorService.setInjector(injector); //Store the injector so that we can access it later
   }
 }

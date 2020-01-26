@@ -58,7 +58,7 @@ export class KiiLanguageSelectorComponent extends KiiBaseAbstract implements OnI
 
   /**Selects language when user clicks on a flag */
   selectLanguage(iso:string) {
-    this._lang.set(iso);
+    this._lang.changeLanguage(iso);
     this.currentLanguage = this.getCode(iso); 
   }
 

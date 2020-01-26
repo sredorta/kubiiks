@@ -57,6 +57,7 @@ import { KiiLoginComponent } from './routes/kii-login/kii-login.component';
 import { KiiCommonModule } from '../common/kii-common.module';
 import { KiiAuthRoutingModule } from './kii-auth-routing.module';
 import { KiiSignupComponent } from './routes/kii-signup/kii-signup.component';
+import { KiiLanguageService } from '../common/services/kii-language.service';
 
 
 @NgModule({
@@ -112,4 +113,7 @@ import { KiiSignupComponent } from './routes/kii-signup/kii-signup.component';
   exports:[
   ]
 })
-export class KiiAuthModule { }
+export class KiiAuthModule { 
+
+
+}
