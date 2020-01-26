@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { KiiLanguageService } from './_features/common/services/kii-language.service';
 
 @Component({
   selector: 'app-root',
@@ -8,11 +8,18 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class AppComponent {
   //title = 'kubiiks';
-  constructor(private trans : TranslateService) {}
+  constructor(private kiiLang : KiiLanguageService) {}
 
   ngOnInit() {
     console.log("Setting lang to fr");
-    this.trans.setDefaultLang('fr');
-    this.trans.use('fr');
+
+
+    this.kiiLang.use('toto');
+    this.kiiLang.setContext('main');
+    this.kiiLang.use('fr');
+    this.kiiLang.loadTranslation(['main','auth']);
+
+
+
   }
 }

@@ -47,14 +47,14 @@ export class KiiStateTransferService {
   }
 
   /**Saves translations to the transfer state table */
-  saveTranslations(lang:string,data:any) {
-    const key: StateKey<number> = makeStateKey<number>('transfer-translate-' + lang);
+  saveTranslations(context:string,data:any) {
+    const key: StateKey<number> = makeStateKey<number>('transfer-translate-' + context);
     this.transferState.set(key, data);
   }
 
   /**Restores translations from the transfer state table, returns null if there aren't */
-  restoreTranslations(lang:string) {
-    const key: StateKey<number> = makeStateKey<number>('transfer-translate-' + lang);
+  restoreTranslations(context:string) {
+    const key: StateKey<number> = makeStateKey<number>('transfer-translate-' + context);
     return this.transferState.get(key, null);
   }
 

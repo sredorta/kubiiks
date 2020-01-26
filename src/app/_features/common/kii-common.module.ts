@@ -2,7 +2,7 @@
 //Includes the minimal set of components required to show the main pages
 ////////////////////////////////////////////////////////////////////////////////
 
-import { NgModule } from '@angular/core';
+import { NgModule, PLATFORM_ID, Injector } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 //TODO Reduce list to the strict minimum used in common feature components
@@ -19,8 +19,6 @@ import {
   MatToolbarModule,
   MatTooltipModule,
 } from '@angular/material';
-import { KiiLanguageService} from 'src/app/services/kii-language.service';
-import { TranslateService, TranslateModule, TranslateLoader, TranslateDirective } from '@ngx-translate/core';
 import { KiiHeaderComponent } from './components/kii-header/kii-header.component';
 import { KiiFooterComponent } from './components/kii-footer/kii-footer.component';
 import { KiiToolbarComponent } from './components/kii-toolbar/kii-toolbar.component';
@@ -31,7 +29,11 @@ import { RouterModule } from '@angular/router';
 import { HeaderComponent } from 'src/app/components/header/header.component';
 import { FooterComponent } from 'src/app/components/footer/footer.component';
 import { ToolbarComponent } from 'src/app/components/toolbar/toolbar.component';
-
+import { KiiLanguageService } from './services/kii-language.service';
+import { KiiStateTransferService } from './services/kii-state-transfer.service';
+import { KiiInjectorService } from './services/kii-injector.service';
+import { KiiTranslatePipe } from './pipes/kii-translate.pipe';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @NgModule({
   imports: [
@@ -51,9 +53,9 @@ import { ToolbarComponent } from 'src/app/components/toolbar/toolbar.component';
       MatToolbarModule,
       MatTooltipModule,
     ],
-    TranslateModule,
   ],
   declarations: [
+    KiiTranslatePipe,
     HomeComponent,
     KiiHeaderComponent,
     HeaderComponent,
@@ -64,11 +66,16 @@ import { ToolbarComponent } from 'src/app/components/toolbar/toolbar.component';
     KiiPageComponent,
     KiiLanguageSelectorComponent,
   ],
-  providers:[KiiLanguageService,TranslateService],
+  providers:[DeviceDetectorService,KiiLanguageService,KiiStateTransferService,KiiInjectorService],
   exports:[
     HomeComponent,
     KiiPageComponent,
-    KiiToolbarComponent
+    KiiToolbarComponent,
+    KiiTranslatePipe
   ]
 })
-export class KiiCommonModule { }
+export class KiiCommonModule { 
+  constructor(injector:Injector) {
+    KiiInjectorService.setInjector(injector); //Store the injector so that we can access it later
+  }
+}

@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BlogRoutingModule } from './blog-routing.module';
 import { BlogPageComponent } from '../blog-page/blog-page.component';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TransferState } from '@angular/platform-browser';
 import { HttpClient } from '@angular/common/http';
 import { KiiCommonModule } from 'src/app/_features/common/kii-common.module';
@@ -15,7 +14,6 @@ import { KiiCommonModule } from 'src/app/_features/common/kii-common.module';
     BlogRoutingModule,
     KiiCommonModule,
     //Each Lazy module needs to load it's translation files
-    TranslateModule
   ]
 })
 export class BlogModule { }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { KiiLanguageService } from 'src/app/_features/common/services/kii-language.service';
 
 @Component({
   selector: 'app-home',
@@ -8,13 +8,13 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private trans: TranslateService) { }
+  constructor(private trans: KiiLanguageService) { }
 
   ngOnInit() {
   }
 
   switch() {
-    if (this.trans.currentLang == 'fr') this.trans.use('en');
+    if (this.trans.getCurrent() == 'fr') this.trans.use('en');
     else this.trans.use('fr');
 
   }

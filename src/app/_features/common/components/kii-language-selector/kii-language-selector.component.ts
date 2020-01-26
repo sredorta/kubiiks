@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { KiiLanguageService } from '../../services/kii-language.browser.service';
-import { TranslateService } from '@ngx-translate/core';
 import { KiiBaseAbstract } from 'src/app/abstracts/kii-base.abstract';
+import { KiiLanguageService } from '../../services/kii-language.service';
 
 @Component({
   selector: 'kii-language-selector',
@@ -12,7 +11,7 @@ export class KiiLanguageSelectorComponent extends KiiBaseAbstract implements OnI
 
   currentLanguage : string;
 
-  constructor(private trans:TranslateService, private _lang : KiiLanguageService ) {
+  constructor(private trans:KiiLanguageService, private _lang : KiiLanguageService ) {
     super();
   }
 
