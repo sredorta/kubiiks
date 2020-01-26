@@ -14,6 +14,7 @@ export class BlogPageComponent implements OnInit {
   ngOnInit() {
     console.log("ONINIT");
     this.kiiLang.setRequiredContext(['main']);
+    console.log("BLOG ONINIT !!!!!!!!!!!!!!!");
   }
 
 }

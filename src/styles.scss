@@ -4,10 +4,11 @@ html, body { height: 100%; }
 body { 
     margin: 0; 
     font-family: Roboto, "Helvetica Neue", sans-serif;
-    width:100vw;
+    //width:100vw;
     overflow-x:hidden;
     background:black;
     color:white;
+    box-sizing: content-box;
 }
 //Avoid blue outline on any element
 * {
@@ -30,7 +31,7 @@ span,p,h1,h2,h3,small,div,a {
         -ms-user-select: none !important;
         user-select: none !important;
     }*/
-    box-sizing: border-box;
+    box-sizing: content-box;
 }
 
 /*Remove Chrome autofill automatic settings on inputs*/
@@ -55,6 +56,9 @@ input:-webkit-autofill,
 .w100 {
     width:100%;
 }
+.mw100 {
+    min-width: 100%;
+}
 .h100 {
     height:100%;
 }
@@ -65,4 +69,68 @@ input:-webkit-autofill,
     align-items: center;
 }
 
+.txt-b {
+    font-weight: bold;
+}
+.txt-nb {
+    font-weight: normal;
+}
 
+.txt-xs {
+    font-size: 10px;
+}
+.txt-s {
+    font-size: 12px;
+}
+.txt-m {
+    font-size: 14px;
+}
+.txt-l {
+    font-size: 18px;
+}
+.txt-xl {
+    font-size:22px;
+}
+.txt-xxl {
+    font-size:26px;
+}
+
+@media only screen and (min-width: 700px) { 
+    .txt-xs {
+        font-size: 12px;
+    }
+    .txt-s {
+        font-size: 14px;
+    }
+    .txt-m {
+        font-size: 16px;
+    }
+    .txt-l {
+        font-size: 20px;
+    }
+    .txt-xl {
+        font-size:24px;
+    }
+    .txt-xxl {
+        font-size:28px;
+    }
+}
+
+
+//CREATE A THEME !!!!!
+::-webkit-scrollbar {
+    //opacity: 0.5;
+    background-color:rgba(yellow,1);
+    width:5px;
+    height:5px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+      border-radius: 50vh;
+      background-color: rgba(orange,0.6);
+  }
+  body * {
+    scrollbar-color: rgba(blue,0.6) rgba(green,1);
+    scrollbar-width: thin;
+    -ms-scrollbar-width:thin;
+  }

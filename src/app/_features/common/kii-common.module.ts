@@ -18,6 +18,7 @@ import {
   MatSnackBarModule,
   MatToolbarModule,
   MatTooltipModule,
+  MatDividerModule,
 } from '@angular/material';
 import { KiiHeaderComponent } from './components/kii-header/kii-header.component';
 import { KiiFooterComponent } from './components/kii-footer/kii-footer.component';
@@ -34,12 +35,14 @@ import { KiiInjectorService } from './services/kii-injector.service';
 import { KiiTranslatePipe } from './pipes/kii-translate.pipe';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { KiiViewTransferService } from './services/kii-view-transfer.service';
+import { KiiAppComponent } from './components/kii-app/kii-app.component';
+import { KiiBottomSheetCookiesComponent } from './components/kii-bottom-sheet-cookies/kii-bottom-sheet-cookies.component';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
-    [  
+    [ MatDividerModule, 
       MatBottomSheetModule,
       MatButtonModule,
       MatCardModule,
@@ -55,6 +58,7 @@ import { KiiViewTransferService } from './services/kii-view-transfer.service';
   ],
   declarations: [
     KiiTranslatePipe,
+    KiiAppComponent,
     HomeComponent,
     KiiHeaderComponent,
     HeaderComponent,
@@ -63,20 +67,17 @@ import { KiiViewTransferService } from './services/kii-view-transfer.service';
     KiiToolbarComponent,
     ToolbarComponent,
     KiiPageComponent,
-    KiiLanguageSelectorComponent
+    KiiLanguageSelectorComponent,
+    KiiBottomSheetCookiesComponent
   ],
   providers:[DeviceDetectorService,KiiInjectorService,KiiLanguageService, KiiViewTransferService],
+  entryComponents:[KiiBottomSheetCookiesComponent],
   exports:[
+    KiiAppComponent,
     HomeComponent,
     KiiPageComponent,
     KiiToolbarComponent,
     KiiTranslatePipe
   ]
 })
-export class KiiCommonModule { 
-  constructor(injector:Injector, private transfer: KiiViewTransferService) {
-    KiiInjectorService.setInjector(injector); //Store the injector so that we can access it later
-    this.transfer.scroll(); //Handle scroll when transfer server/browser
-  }
-
-}
+export class KiiCommonModule { }

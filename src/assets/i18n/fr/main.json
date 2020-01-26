@@ -1,4 +1,9 @@
 {
+    "m.accept" : "Accepter",
+    "m.decline" : "Refuser",
+    "m.cookies.title" : "Utilisation de Cookies",
+    "m.cookies.subtitle": "Ce site utilise des cookies, qui sont nécessaires pour des fonctionnalités comme la génération de statistiques ou le partage dans les réseaux sociaux. Acceptez-vous l'utilisation de cookies ?",
+
     "kiilib.language": "Language en francais",
     "test" : "Test en francais {{test1}} et le deuxieme {{test2}}",
     "test1" : "Test en francais",

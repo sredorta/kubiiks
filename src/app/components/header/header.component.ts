@@ -20,10 +20,13 @@ export class HeaderComponent implements OnInit {
 
   @ViewChild('videoPlayer',{static:false}) videoplayer: ElementRef;
 
-  constructor(private device : DeviceDetectorService, @Inject(PLATFORM_ID) private platformId: any, private transfer: KiiViewTransferService) { }
+  constructor(private device : DeviceDetectorService, 
+            @Inject(PLATFORM_ID) private platformId: any, 
+            private transfer: KiiViewTransferService
+            ) { }
 
   ngOnInit() {
-      this.showVideo = isPlatformBrowser(this.platformId)
+      this.showVideo = isPlatformBrowser(this.platformId);
   }
   ngAfterViewInit() {
     if (this.showVideo) {
