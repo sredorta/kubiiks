@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { KiiLanguageService } from 'src/app/_features/common/services/kii-language.service';
-import { KiiFeatureAbstract } from 'src/app/abstracts/kii-feature.abstract';
 
 @Component({
   selector: 'app-contact-page',
   templateUrl: './contact-page.component.html',
   styleUrls: ['./contact-page.component.scss']
 })
-export class ContactPageComponent extends KiiFeatureAbstract implements OnInit {
+export class ContactPageComponent implements OnInit {
 
-  constructor() {super(['main']); }
+  constructor(public kiiLang : KiiLanguageService) {}
 
   ngOnInit() {
-    this.init();
+    this.kiiLang.setRequiredContext(['main']);
+
   }
 
 }

@@ -1,7 +1,7 @@
 import { Optional, Inject, Injectable, PLATFORM_ID, ChangeDetectorRef, ApplicationRef } from '@angular/core';
 import { REQUEST } from '@nguniversal/express-engine/tokens';
 import { environment } from '../../../../environments/environment';
-import { Observable,of, forkJoin, Subject } from 'rxjs';
+import { Observable,of, forkJoin, Subject, BehaviorSubject } from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import { isPlatformBrowser} from '@angular/common';
 import { StateKey, makeStateKey, TransferState } from '@angular/platform-browser';
@@ -23,7 +23,7 @@ export  class KiiLanguageService  {
   public onChange = new Subject<string>();
 
   /**Observable that changes when loading process is completed */
-  public onLoaded = new Subject<boolean>();
+  public onLoaded = new BehaviorSubject<boolean>(false);
 
   private _onLoaded : boolean = false;
   
@@ -65,6 +65,7 @@ export  class KiiLanguageService  {
     private http: HttpClient,
     ) { 
         this.currentLang = this.get();
+        console.log("CONSTRUCTOR: KIILANGSERVICE")
     }
 
 
@@ -149,6 +150,10 @@ export  class KiiLanguageService  {
           if (this.isContextAvailable(ctx)) {
             console.log("Context already available");
             console.log(this);
+            //Notify pipes !
+            this.onLoaded.next(!this._onLoaded);
+            //wait.push(this.loadContextFromAvailable(ctx));
+
           } else {
             //Load context
             console.log("Loading context data: ", ctx) 
@@ -173,6 +178,15 @@ export  class KiiLanguageService  {
               this.onChange.next(this.currentLang);
             }
         })
+  }
+
+  /**Returns translations from context */
+  private loadContextFromAvailable(contextName:string) {
+    return Observable.create(observer => {
+      observer.next(this.translations);
+      observer.complete();
+    });
+
   }
 
   /**Loads the context from the TransferState if exists */

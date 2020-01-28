@@ -26,7 +26,7 @@ import { KiiToolbarComponent } from './components/kii-toolbar/kii-toolbar.compon
 import { KiiPageComponent } from './components/kii-page/kii-page.component';
 import { KiiLanguageSelectorComponent } from './components/kii-language-selector/kii-language-selector.component';
 import { HomeComponent } from 'src/app/routes/home/home.component';
-import { RouterModule } from '@angular/router';
+import { RouterModule, ExtraOptions } from '@angular/router';
 import { HeaderComponent } from 'src/app/components/header/header.component';
 import { FooterComponent } from 'src/app/components/footer/footer.component';
 import { ToolbarComponent } from 'src/app/components/toolbar/toolbar.component';
@@ -36,6 +36,9 @@ import { KiiTranslatePipe } from './pipes/kii-translate.pipe';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { KiiViewTransferService } from './services/kii-view-transfer.service';
 import { KiiBottomSheetCookiesComponent } from './components/kii-bottom-sheet-cookies/kii-bottom-sheet-cookies.component';
+import { ModuleWithProviders } from '@angular/core';
+import { KiiAppComponent } from './components/kii-app/kii-app.component';
+import { KiiCookiesService } from './services/kii-cookies.service';
 
 @NgModule({
   imports: [
@@ -56,8 +59,8 @@ import { KiiBottomSheetCookiesComponent } from './components/kii-bottom-sheet-co
     ],
   ],
   declarations: [
+    KiiAppComponent,
     KiiTranslatePipe,
-    HomeComponent,
     KiiHeaderComponent,
     HeaderComponent,
     KiiFooterComponent,
@@ -65,20 +68,38 @@ import { KiiBottomSheetCookiesComponent } from './components/kii-bottom-sheet-co
     KiiToolbarComponent,
     ToolbarComponent,
     KiiPageComponent,
+    HomeComponent,
     KiiLanguageSelectorComponent,
-    KiiBottomSheetCookiesComponent
+    KiiBottomSheetCookiesComponent,
+    KiiAppComponent
   ],
-  providers:[DeviceDetectorService,KiiInjectorService,KiiLanguageService, KiiViewTransferService],
+  //providers:[DeviceDetectorService,KiiInjectorService,KiiLanguageService, KiiViewTransferService],
   entryComponents:[KiiBottomSheetCookiesComponent],
   exports:[
-    HomeComponent,
+    KiiAppComponent,
     KiiPageComponent,
     KiiToolbarComponent,
     KiiTranslatePipe
   ]
 })
 export class KiiCommonModule { 
-  constructor(injector:Injector) {
+/*  constructor(injector:Injector) {
     KiiInjectorService.setInjector(injector); //Store the injector so that we can access it later
+  }*/
+
+  //Providers available in the whole design including laze-loaded routes
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: KiiCommonModule,
+      providers: [DeviceDetectorService, KiiLanguageService, KiiViewTransferService, KiiCookiesService ],
+    }
+  }
+
+  //Providers available only on child routes, services will have their own instance !
+  static forChild(): ModuleWithProviders {
+    return {
+      ngModule: KiiCommonModule,
+      providers: []
+    }
   }
 }

@@ -16,7 +16,7 @@ import { KiiInjectorService } from './_features/common/services/kii-injector.ser
     AppModule,
     ServerModule,
     NoopAnimationsModule,
-    KiiCommonModule,
+    KiiCommonModule.forRoot(), //Common module containing all the shared main elements and home page
     ServerTransferStateModule,
     ModuleMapLoaderModule,
   ],

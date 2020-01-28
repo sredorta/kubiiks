@@ -1,5 +1,5 @@
 //Each feature has a common part and here we add it
-import {Subscription} from 'rxjs';
+/*import {Subscription} from 'rxjs';
 import { KiiBaseAbstract } from './kii-base.abstract';
 import { KiiInjectorService } from '../_features/common/services/kii-injector.service';
 import { Injector, PLATFORM_ID } from '@angular/core';
@@ -59,4 +59,4 @@ export abstract class KiiFeatureAbstract extends KiiBaseAbstract  {
       })    
   }
 
-}
+}*/

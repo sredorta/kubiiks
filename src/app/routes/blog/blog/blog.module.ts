@@ -7,6 +7,7 @@ import { KiiCommonModule } from 'src/app/_features/common/kii-common.module';
 import { KiiLanguageService } from 'src/app/_features/common/services/kii-language.service';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { MatRippleModule, MatButtonModule } from '@angular/material';
 
 
 @NgModule({
@@ -16,9 +17,12 @@ import { CommonModule } from '@angular/common';
   imports: [
     CommonModule,
     RouterModule,
+    [
+      MatButtonModule,
+      MatRippleModule
+    ],
     KiiCommonModule,
     BlogRoutingModule,
-    //Each Lazy module needs to load it's translation files
   ],
 })
 export class BlogModule { }

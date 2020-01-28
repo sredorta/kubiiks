@@ -21,7 +21,7 @@ import { KiiInjectorService } from './_features/common/services/kii-injector.ser
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserTransferStateModule,
-    KiiCommonModule, //Common module containing all the shared main elements and home page
+    KiiCommonModule.forRoot(), //Common module containing all the shared main elements and home page
     RouterModule.forChild(routes),
     //NGX-TRANSLATE PART
     HttpClientModule,
@@ -30,7 +30,5 @@ import { KiiInjectorService } from './_features/common/services/kii-injector.ser
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-
-}
+export class AppModule {}
 

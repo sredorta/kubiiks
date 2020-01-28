@@ -1,20 +1,25 @@
 import { Pipe, PipeTransform, ChangeDetectorRef } from '@angular/core';
 import { KiiLanguageService } from '../services/kii-language.service';
 import { transformAll } from '@angular/compiler/src/render3/r3_ast';
+import { BehaviorSubject, Subscription } from 'rxjs';
 
 @Pipe({
   name: 'translate',
-  pure:false
 })
 export class KiiTranslatePipe implements PipeTransform {
   previousValue : string;
+  subscription = [];
   constructor(private trans :KiiLanguageService) {}
   transform(value: any, ...args: any[]): any {
-      if (this.trans.translations[this.trans.getCurrent()]) 
-      if (this.trans.translations[this.trans.getCurrent()].hasOwnProperty(value)) {
-        return this.getFromTranslation(value,args);
-      }
-      return '**' + value + '**';
+      const _subject = new BehaviorSubject('');
+      this.subscription.push(this.trans.onLoaded.subscribe(res => {
+        if (this.trans.translations[this.trans.getCurrent()]) 
+        if (this.trans.translations[this.trans.getCurrent()].hasOwnProperty(value)) {
+          console.log("RUNNING TRANSLATE:",value);
+          _subject.next(this.getFromTranslation(value,args));
+        }
+      }))
+      return _subject;
   }
 
   getFromTranslation(key:string,args:any[]) {
@@ -24,7 +29,7 @@ export class KiiTranslatePipe implements PipeTransform {
     }
     //Do replacement, we only accept one parameter with object
     if (args.length!=1) {
-      console.error("Wrong format only one parameter accepted as an object:  key | translate:param "); 
+      console.error("Wrong format only one parameter accepted as an object:  key | translate | async:param "); 
       return this.trans.translations[this.trans.getCurrent()][key];
     }
     if (args[0]===undefined) {
@@ -38,22 +43,11 @@ export class KiiTranslatePipe implements PipeTransform {
     return str;
   }
 
-}
-
-/*
-@Pipe({
-  name: 'translate',
-  pure:false
-})
-export class KiiTranslatePipe implements PipeTransform {
-  previousValue : string;
-  constructor(private trans :KiiLanguageService, private ref: ChangeDetectorRef) {}
-  transform(value: any, ...args: any[]): any {
-      if (this.trans.translations[this.trans.getCurrent()]) 
-      if (this.trans.translations[this.trans.getCurrent()].hasOwnProperty(value)) {
-        return this.trans.translations[this.trans.getCurrent()][value];
-      }
-      return '**' + value + '**';
+  ngOnDestroy() {
+    console.log("DESTROYING !!!!");
+    for (let subscription of this.subscription) {
+      console.log("unsubscribing !!!");
+      subscription.unsubscribe();
+    }
   }
-
-}*/
+}

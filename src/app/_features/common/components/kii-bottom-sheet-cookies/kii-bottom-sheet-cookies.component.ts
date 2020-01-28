@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatBottomSheetRef } from '@angular/material';
+import { KiiLanguageService } from '../../services/kii-language.service';
 
 @Component({
   selector: 'app-kii-bottom-sheet-cookies',
@@ -8,10 +9,16 @@ import { MatBottomSheetRef } from '@angular/material';
 })
 export class KiiBottomSheetCookiesComponent implements OnInit {
 
-  constructor(private ref: MatBottomSheetRef<KiiBottomSheetCookiesComponent>) { }
+  constructor(private kiiLang: KiiLanguageService, private ref: MatBottomSheetRef<KiiBottomSheetCookiesComponent>) { 
+  }
 
   ngOnInit() {
   }
+  ngAfterViewInit() {
+    //this.kiiLang.setRequiredContext(['main']);
+
+  }
+
 
   reject() {
     this.ref.dismiss(false);
