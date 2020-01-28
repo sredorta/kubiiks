@@ -25,12 +25,17 @@ export const routes: Routes = [
     loadChildren : () => import('./routes/contact/contact/contact.module').then(m => m.ContactModule), 
     pathMatch: 'full'
   },
-  //Load auth module
+  //Lazy load auth module
   {
     path: 'auth',
-    //loadChildren : () => import('./routes/login/login/login.module').then(m => m.LoginModule), 
     loadChildren : () => import('./_features/auth/kii-auth.module').then(m => m.KiiAuthModule), 
   },
+  //Lazy load legal module
+  {
+    path: 'legal',
+    loadChildren : () => import('./_features/legal/kii-legal.module').then(m => m.KiiLegalModule), 
+  },
+
 
 ];
 

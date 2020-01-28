@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class BlogPageComponent  implements OnInit {
 
-  constructor(public kiiLang:KiiLanguageService) { 
+  constructor(private kiiLang:KiiLanguageService) { 
 
   }
 

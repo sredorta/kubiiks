@@ -39,6 +39,8 @@ import { KiiBottomSheetCookiesComponent } from './components/kii-bottom-sheet-co
 import { ModuleWithProviders } from '@angular/core';
 import { KiiAppComponent } from './components/kii-app/kii-app.component';
 import { KiiCookiesService } from './services/kii-cookies.service';
+import { KiiNewsletterComponent } from './components/kii-newsletter/kii-newsletter.component';
+import { KiiNewsletterFormComponent } from './components/kii-newsletter-form/kii-newsletter-form.component';
 
 @NgModule({
   imports: [
@@ -59,6 +61,8 @@ import { KiiCookiesService } from './services/kii-cookies.service';
     ],
   ],
   declarations: [
+    KiiNewsletterComponent,
+    KiiNewsletterFormComponent,
     KiiAppComponent,
     KiiTranslatePipe,
     KiiHeaderComponent,
@@ -79,7 +83,9 @@ import { KiiCookiesService } from './services/kii-cookies.service';
     KiiAppComponent,
     KiiPageComponent,
     KiiToolbarComponent,
-    KiiTranslatePipe
+    KiiTranslatePipe,
+    KiiFooterComponent,
+    FooterComponent
   ]
 })
 export class KiiCommonModule { 

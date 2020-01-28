@@ -41,7 +41,7 @@ export  class KiiLanguageService  {
   public translations:any = {};
 
   /**All languages that can potentially be used, use the environment to select a subset */
-  public KiiLanguages : IKiiLanguage[] = [
+  private kiiLanguages : IKiiLanguage[] = [
     {name: "Francais",
      iso : "fr",
      code : "FR" },

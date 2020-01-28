@@ -8,18 +8,18 @@ import { KiiLanguageService } from 'src/app/_features/common/services/kii-langua
 })
 export class HomeComponent implements OnInit {
 
+  count1 = 20;
+  count2 = 30;
+  param = {count1:this.count1, count2:this.count2};
+
   constructor(private trans: KiiLanguageService) { }
 
   ngOnInit() {
 
   }
   reload() {
-    console.log("RELOAD !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-    this.trans.setRequiredContext(['main']);
+    this.count1++;
+    this.count2++;
   }
 
-  /*switch() {
-    if (this.trans.getCurrent() == 'fr') this.trans.use('en');
-    else this.trans.use('fr');
-  }*/
 }

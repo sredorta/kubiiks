@@ -8,7 +8,7 @@ import { KiiLanguageService } from 'src/app/_features/common/services/kii-langua
 })
 export class KiiLoginComponent implements OnInit {
 
-  constructor(public kiiLang: KiiLanguageService) {
+  constructor(private kiiLang: KiiLanguageService) {
    }
 
   ngOnInit() {

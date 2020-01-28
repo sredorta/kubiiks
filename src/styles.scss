@@ -7,19 +7,14 @@ body {
     //width:100vw;
     overflow-x:hidden;
     background:black;
-    color:white;
     box-sizing: content-box;
+    font-family: "Montserrat","Roboto","Helvetica Neue",sans-serif;  //Main font
 }
 //Avoid blue outline on any element
 * {
     //border: none;    //TO BE ADDED !!!
     outline: none;
 }
-a {
-    text-decoration: none;
-    font-weight: bold;
-}
-
 
 //Avoid text selection and blue outline
 span,p,h1,h2,h3,small,div,a {
@@ -52,6 +47,33 @@ input:-webkit-autofill,
             transition-delay: 999999s;
 }
 
+////////////////////////////////////////////////////////////////////////////    
+// FONTS
+////////////////////////////////////////////////////////////////////////////
+
+
+@font-face {
+    font-family: "Montserrat";
+    font-weight: 400;
+    font-style: normal;    
+    src: url("/assets/fonts/Montserrat/Montserrat-Regular.eot");
+    src: url("/assets/fonts/Montserrat/Montserrat-Regular.eot?#iefix") format('embedded-opentype'),
+         url("/assets/fonts/Montserrat/Montserrat-Regular.woff2") format("woff2"),
+         url("/assets/fonts/Montserrat/Montserrat-Regular.woff") format("woff");
+
+    font-display: swap;
+}
+@font-face {
+    font-family: "Montserrat";
+    font-weight: 600;
+    font-style: normal;
+    src: url("/assets/fonts/Montserrat/Montserrat-SemiBold.eot");
+    src: url("/assets/fonts/Montserrat/Montserrat-SemiBold.eot?#iefix") format('embedded-opentype'),
+         url("/assets/fonts/Montserrat/Montserrat-SemiBold.woff2") format("woff2"),
+         url("/assets/fonts/Montserrat/Montserrat-SemiBold.woff") format("woff");
+    font-display: swap;
+}
+
 //GENERAL CLASSES THAT ARE OFTEN USED
 .w100 {
     width:100%;
@@ -62,6 +84,9 @@ input:-webkit-autofill,
 .h100 {
     height:100%;
 }
+
+
+
 //Flex center-center
 .fcc {
     display:flex;
@@ -69,68 +94,66 @@ input:-webkit-autofill,
     align-items: center;
 }
 
+//Text alignments
+.txt-ac {
+    text-align: center;
+}
+.txt-al {
+    text-align: left;
+}
+.txt-ar {
+    text-align: right;
+}
+
+//Text style
 .txt-b {
     font-weight: bold;
+}
+.txt-i {
+    font-style: italic;
 }
 .txt-nb {
     font-weight: normal;
 }
 
+
 .txt-xs {
-    font-size: 10px;
-}
-.txt-s {
     font-size: 12px;
 }
-.txt-m {
+.txt-s {
     font-size: 14px;
+}
+.txt-m {
+    font-size: 16px;
 }
 .txt-l {
     font-size: 18px;
 }
 .txt-xl {
-    font-size:22px;
+    font-size:26px;
 }
 .txt-xxl {
-    font-size:26px;
+    font-size:34px;
 }
 
 @media only screen and (min-width: 700px) { 
     .txt-xs {
-        font-size: 12px;
-    }
-    .txt-s {
         font-size: 14px;
     }
-    .txt-m {
+    .txt-s {
         font-size: 16px;
     }
+    .txt-m {
+        font-size: 18px;
+    }
     .txt-l {
-        font-size: 20px;
+        font-size: 22px;
     }
     .txt-xl {
-        font-size:24px;
+        font-size:32px;
     }
     .txt-xxl {
-        font-size:28px;
+        font-size:42px;
     }
 }
 
-
-//CREATE A THEME !!!!!
-::-webkit-scrollbar {
-    //opacity: 0.5;
-    background-color:rgba(yellow,1);
-    width:5px;
-    height:5px;
-  }
-
-  ::-webkit-scrollbar-thumb {
-      border-radius: 50vh;
-      background-color: rgba(orange,0.6);
-  }
-  body * {
-    scrollbar-color: rgba(blue,0.6) rgba(green,1);
-    scrollbar-width: thin;
-    -ms-scrollbar-width:thin;
-  }

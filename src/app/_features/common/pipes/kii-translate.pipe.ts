@@ -11,7 +11,7 @@ export class KiiTranslatePipe implements PipeTransform {
   subscription = [];
   constructor(private trans :KiiLanguageService) {}
   transform(value: any, ...args: any[]): any {
-      const _subject = new BehaviorSubject('');
+      const _subject = new BehaviorSubject(value);
       this.subscription.push(this.trans.onLoaded.subscribe(res => {
         if (this.trans.translations[this.trans.getCurrent()]) 
         if (this.trans.translations[this.trans.getCurrent()].hasOwnProperty(value)) {
@@ -29,7 +29,7 @@ export class KiiTranslatePipe implements PipeTransform {
     }
     //Do replacement, we only accept one parameter with object
     if (args.length!=1) {
-      console.error("Wrong format only one parameter accepted as an object:  key | translate | async:param "); 
+      console.error("Wrong format only one parameter accepted as an object:  key | translate | async:param, where param is a mutated object !!!"); 
       return this.trans.translations[this.trans.getCurrent()][key];
     }
     if (args[0]===undefined) {
