@@ -6,21 +6,23 @@ import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { MatBottomSheet } from '@angular/material';
 import { KiiBottomSheetCookiesComponent } from '../kii-bottom-sheet-cookies/kii-bottom-sheet-cookies.component';
 import { KiiViewTransferService } from '../../services/kii-view-transfer.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, NavigationStart, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
+import { KiiBaseAbstract } from 'src/app/abstracts/kii-base.abstract';
 
 @Component({
   selector: 'kii-app',
   templateUrl: './kii-app.component.html',
   styleUrls: ['./kii-app.component.scss']
 })
-export class KiiAppComponent implements OnInit {
+export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
 
   constructor(@Inject(PLATFORM_ID) private platform: any,
               private kiiLang: KiiLanguageService,
               private viewTrans : KiiViewTransferService,
               private bottomSheet: MatBottomSheet,
               private router : Router,
-              private location : Location) { }
+              private location : Location) { super() }
 
   ngOnInit() {
 
@@ -29,12 +31,23 @@ export class KiiAppComponent implements OnInit {
 
     //Sets language required context
     this.kiiLang.setRequiredContext(['main']);
+
+    //Handle cookies
     if (isPlatformBrowser(this.platform)) {
-        //CHECK FOR COOKIES
-        if (!Cookies.areAccepted()) {
-          this.openBottomSheetCookies();
-        }
+      this.addSubscriber(
+        this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe( (res : NavigationEnd) => {
+          if (res.url.includes('cookies')) {
+            this.bottomSheet.dismiss();
+          } else {
+            if (!Cookies.areAccepted()) {
+              this.openBottomSheetCookies();
+            }
+          }
+        })
+      );
     }
+
+
   }
   openBottomSheetCookies(): void {
     this.bottomSheet.open(KiiBottomSheetCookiesComponent, {
@@ -47,7 +60,7 @@ export class KiiAppComponent implements OnInit {
         else Cookies.refuse();
         subs.unsubscribe();
         //If our current route is /auth/cookies then navigate back
-        if (this.router.url.includes('cookies')) this.location.back();
+        //if (this.router.url.includes('cookies')) this.location.back();
       })    
   }
 }

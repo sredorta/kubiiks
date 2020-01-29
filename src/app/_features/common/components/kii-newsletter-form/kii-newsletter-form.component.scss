@@ -1,10 +1,10 @@
 form {
-    padding: 20px 0px 20px 0px;
+    padding: 10px 0px;
     .ctrls {
         display:flex;
         flex-direction: column;
         &>* {
-            margin:0px 10px;
+            margin:10px 10px;
             flex:1 1 auto;
             
         }

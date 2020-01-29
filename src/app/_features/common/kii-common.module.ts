@@ -39,10 +39,10 @@ import { KiiViewTransferService } from './services/kii-view-transfer.service';
 import { KiiBottomSheetCookiesComponent } from './components/kii-bottom-sheet-cookies/kii-bottom-sheet-cookies.component';
 import { ModuleWithProviders } from '@angular/core';
 import { KiiAppComponent } from './components/kii-app/kii-app.component';
-import { KiiCookiesService } from './services/kii-cookies.service';
 import { KiiNewsletterComponent } from './components/kii-newsletter/kii-newsletter.component';
 import { KiiNewsletterFormComponent } from './components/kii-newsletter-form/kii-newsletter-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { KiiFormRestoreService } from './services/kii-form-restore.service';
 
 @NgModule({
   imports: [
@@ -101,7 +101,7 @@ export class KiiCommonModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: KiiCommonModule,
-      providers: [DeviceDetectorService, KiiLanguageService, KiiViewTransferService, KiiCookiesService ],
+      providers: [DeviceDetectorService, KiiLanguageService, KiiViewTransferService, KiiFormRestoreService ],
     }
   }
 

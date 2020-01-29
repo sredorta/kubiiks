@@ -1,7 +1,6 @@
-import { Pipe, PipeTransform, ChangeDetectorRef } from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core';
 import { KiiLanguageService } from '../services/kii-language.service';
-import { transformAll } from '@angular/compiler/src/render3/r3_ast';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Pipe({
   name: 'translate',
@@ -15,7 +14,6 @@ export class KiiTranslatePipe implements PipeTransform {
       this.subscription.push(this.trans.onLoaded.subscribe(res => {
         if (this.trans.translations[this.trans.getCurrent()]) 
         if (this.trans.translations[this.trans.getCurrent()].hasOwnProperty(value)) {
-          console.log("RUNNING TRANSLATE:",value);
           _subject.next(this.getFromTranslation(value,args));
         }
       }))
@@ -24,7 +22,6 @@ export class KiiTranslatePipe implements PipeTransform {
 
   getFromTranslation(key:string,args:any[]) {
     if (!args.length) {
-      //console.log("RETURNING:",this.trans.translations[this.trans.getCurrent()][key] )
       return this.trans.translations[this.trans.getCurrent()][key];
     }
     //Do replacement, we only accept one parameter with object

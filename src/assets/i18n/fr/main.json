@@ -18,6 +18,7 @@
     "m.news.email.h"    : "Écrivez votre prénom",
     "m.news.email.p"    : "jhon.doe@hotmail.com",  
     "m.news.email.e"    : "Format de courriel incorrecte",
+    "m.news.legal"      : "Conditions d'utilisation des données personnelles",
     "kiilib.language": "Language en francais",
     "test" : "Test en francais",
     "test1" : "Count1 is {{count1}} and count2 is {{count2}}",
