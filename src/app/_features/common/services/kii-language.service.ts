@@ -92,7 +92,7 @@ export  class KiiLanguageService  {
   getSupportedLanguages() {
     let supported = [];
     for (let iso of environment.languages) {
-      supported.push(this.KiiLanguages.find(obj => obj.iso == iso))
+      supported.push(this.kiiLanguages.find(obj => obj.iso == iso))
     }
     return supported;
   }

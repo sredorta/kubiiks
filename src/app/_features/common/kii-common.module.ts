@@ -19,6 +19,7 @@ import {
   MatToolbarModule,
   MatTooltipModule,
   MatDividerModule,
+  MatInputModule,
 } from '@angular/material';
 import { KiiHeaderComponent } from './components/kii-header/kii-header.component';
 import { KiiFooterComponent } from './components/kii-footer/kii-footer.component';
@@ -41,11 +42,14 @@ import { KiiAppComponent } from './components/kii-app/kii-app.component';
 import { KiiCookiesService } from './services/kii-cookies.service';
 import { KiiNewsletterComponent } from './components/kii-newsletter/kii-newsletter.component';
 import { KiiNewsletterFormComponent } from './components/kii-newsletter-form/kii-newsletter-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
+    ReactiveFormsModule,  //Reactive forms
+    MatInputModule,
     [ MatDividerModule, 
       MatBottomSheetModule,
       MatButtonModule,

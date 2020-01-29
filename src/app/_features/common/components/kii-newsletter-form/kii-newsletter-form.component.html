@@ -1,1 +1,25 @@
-<p>kii-newsletter-form works!</p>
+<form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.value)" novalidate>
+    <div class="ctrls">
+        <mat-form-field appearance="fill">
+            <mat-label>{{'m.news.first.l' | translate | async}}</mat-label>
+            <input matInput formControlName="firstName" placeholder="{{'m.news.first.p' | translate | async}}" required type="text" autocomplete="name">
+            <mat-hint>{{'m.news.first.h' | translate | async}}</mat-hint>
+            <mat-error>{{'m.news.first.e' | translate | async}}</mat-error>            
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>{{'m.news.last.l' | translate | async}}</mat-label>
+            <input matInput formControlName="lastName" placeholder="{{'m.news.last.p' | translate | async}}" required type="text"  autocomplete="fname">
+            <mat-hint>{{'m.news.last.h' | translate | async}}</mat-hint>
+            <mat-error>{{'m.news.last.e' | translate | async}}</mat-error>            
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>{{'m.news.email.l' | translate | async}}</mat-label>
+            <input matInput formControlName="email" placeholder="{{'m.news.email.p' | translate | async}}" required type="email" autocomplete="email">
+            <mat-hint>{{'m.news.email.h' | translate | async}}</mat-hint>
+            <mat-error>{{'m.news.email.e' | translate | async}}</mat-error>            
+        </mat-form-field>
+    </div>
+    <div class="fcr w100">
+        <button mat-flat-button type="submit" color="primary">{{'m.register' | translate | async}}</button>
+    </div>
+</form>

@@ -93,6 +93,11 @@ input:-webkit-autofill,
     justify-content: center;
     align-items: center;
 }
+.fcr {
+    display:flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
 
 //Text alignments
 .txt-ac {
