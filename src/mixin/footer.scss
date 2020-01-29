@@ -22,20 +22,26 @@
             padding-bottom:50px;
         }
         .end {
-            padding-top:140px;
+            padding-top:80px;
             transition:padding-top 0.3s ease-in-out;
             padding-bottom:10px;
             background-image: url("/assets/images/footer.svg");
             background-repeat: no-repeat;
-            background-position: left top;
-            background-size: cover;
+            background-position: center top;
+            background-size: 100% auto;
+            background-color: mat-color(mat-palette($mat-grey,200));
             color:mat-color(mat-palette($mat-grey, 700));
             .link {
                 color:mat-color(mat-palette($mat-grey, 700));
                 font-weight: bold;
             }
         }
-        @media only screen and (min-width: 1000px) { 
+        @media only screen and (min-width: 700px) { 
+            .end {
+                padding-top:150px;
+            }
+        }
+        @media only screen and (min-width: 1200px) { 
             .end {
                 padding-top:200px;
             }

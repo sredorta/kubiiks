@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { KiiFormRestoreService } from '../../services/kii-form-restore.service';
+import { KiiApiNewsletterService, INewsletter } from '../../services/kii-api-newsletter.service';
 
 @Component({
   selector: 'kii-newsletter-form',
@@ -9,11 +10,12 @@ import { KiiFormRestoreService } from '../../services/kii-form-restore.service';
 })
 export class KiiNewsletterFormComponent implements OnInit {
   public myForm : FormGroup;
+  @Output() onKiiSubmit = new EventEmitter<INewsletter>();
+
   constructor( private kiiForm : KiiFormRestoreService) { }
 
   ngOnInit() {
     this.createForm();
-
   }
 
   /**Creates the form corresponding with the sharedSettings into account */
@@ -44,9 +46,8 @@ export class KiiNewsletterFormComponent implements OnInit {
   }
 
   onSubmit(value:any) {
-    console.log("Submitting:",value);
     if (this.myForm.valid) {
-      console.log("VALID FORM!");
+      this.onKiiSubmit.emit(value);
     }
   }
 
