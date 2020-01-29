@@ -45,6 +45,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { KiiFormRestoreService } from './services/kii-form-restore.service';
 import { KiiSpinnerComponent } from './components/kii-spinner/kii-spinner.component';
 import { KiiSpinnerOverlayComponent } from './components/kii-spinner-overlay/kii-spinner-overlay.component';
+import { KiiHttpErrorComponent } from './components/kii-http-error/kii-http-error.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { KiiHttpInterceptor } from './utils/kii-http-interceptor';
 
 @NgModule({
   imports: [
@@ -67,6 +70,7 @@ import { KiiSpinnerOverlayComponent } from './components/kii-spinner-overlay/kii
     ],
   ],
   declarations: [
+    KiiHttpErrorComponent,
     KiiSpinnerComponent,
     KiiSpinnerOverlayComponent,
     KiiNewsletterComponent,
@@ -86,8 +90,9 @@ import { KiiSpinnerOverlayComponent } from './components/kii-spinner-overlay/kii
     KiiAppComponent
   ],
   //providers:[DeviceDetectorService,KiiInjectorService,KiiLanguageService, KiiViewTransferService],
-  entryComponents:[KiiBottomSheetCookiesComponent],
+  entryComponents:[KiiBottomSheetCookiesComponent, KiiHttpErrorComponent],
   exports:[
+    KiiHttpErrorComponent,
     KiiSpinnerComponent,
     KiiSpinnerOverlayComponent,
     KiiAppComponent,
@@ -107,7 +112,13 @@ export class KiiCommonModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: KiiCommonModule,
-      providers: [DeviceDetectorService, KiiLanguageService, KiiViewTransferService, KiiFormRestoreService ],
+      providers: [
+        DeviceDetectorService, 
+        KiiLanguageService, 
+        KiiViewTransferService, 
+        KiiFormRestoreService,
+        {provide: HTTP_INTERCEPTORS, useClass: KiiHttpInterceptor, multi: true }
+      ],
     }
   }
 
