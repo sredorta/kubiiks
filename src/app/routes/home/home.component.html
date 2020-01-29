@@ -6,6 +6,8 @@
 <h1>{{'test1' | translate:param | async}}</h1>
 <h1>{{'test3' | translate | async}}</h1>
 <h1>{{'test4' | translate | async}}</h1>
+<kii-spinner></kii-spinner>
+
 <p>home works!</p>
 <p>home works!</p>
 <p>home works!</p>
@@ -15,11 +17,16 @@
 <p>home works!</p>
 <p>home works!</p>
 <button mat-flat-button (click)="reload()">Button here</button>
+<div style="display:block">
 <h1>{{'test' | translate | async}}</h1>
+<kii-spinner-overlay [show]="true">
+    <div style="width:300px;height:300px;border:1px solid green"></div>
+    </kii-spinner-overlay>
 <p>home works!</p>
 <p>home works!</p>
 <p>home works!</p>
 <p>home works!</p>
+</div>
 <img  class="lazy" style="width:100px;height:100px" data-src="./assets/images/chat-icon.svg">
 
 <p>home works!</p>

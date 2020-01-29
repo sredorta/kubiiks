@@ -43,6 +43,8 @@ import { KiiNewsletterComponent } from './components/kii-newsletter/kii-newslett
 import { KiiNewsletterFormComponent } from './components/kii-newsletter-form/kii-newsletter-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { KiiFormRestoreService } from './services/kii-form-restore.service';
+import { KiiSpinnerComponent } from './components/kii-spinner/kii-spinner.component';
+import { KiiSpinnerOverlayComponent } from './components/kii-spinner-overlay/kii-spinner-overlay.component';
 
 @NgModule({
   imports: [
@@ -65,6 +67,8 @@ import { KiiFormRestoreService } from './services/kii-form-restore.service';
     ],
   ],
   declarations: [
+    KiiSpinnerComponent,
+    KiiSpinnerOverlayComponent,
     KiiNewsletterComponent,
     KiiNewsletterFormComponent,
     KiiAppComponent,
@@ -84,6 +88,8 @@ import { KiiFormRestoreService } from './services/kii-form-restore.service';
   //providers:[DeviceDetectorService,KiiInjectorService,KiiLanguageService, KiiViewTransferService],
   entryComponents:[KiiBottomSheetCookiesComponent],
   exports:[
+    KiiSpinnerComponent,
+    KiiSpinnerOverlayComponent,
     KiiAppComponent,
     KiiPageComponent,
     KiiToolbarComponent,
