@@ -13,6 +13,14 @@
   $is-dark-theme: map-get($theme, is-dark);
 
     kii-footer {
+        kii-newsletter .wrp {
+            background-image: url("/assets/images/newsletter-background.svg");
+            background-repeat: no-repeat;
+            background-size: auto 100%;
+            background-position: left center;
+            padding-top:40px;
+            padding-bottom:50px;
+        }
         .end {
             padding-top:140px;
             transition:padding-top 0.3s ease-in-out;

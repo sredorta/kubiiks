@@ -1,21 +1,25 @@
 form {
-    padding: 10px 0px;
     .ctrls {
         display:flex;
         flex-direction: column;
         &>* {
             margin:10px 10px;
-            flex:1 1 auto;
-            
-        }
-
-    }
-    @media only screen and (min-width: 700px) { 
-        .ctrls {
-            flex-direction: row;
+            flex:1 1 auto;      
         }
     }
     button {
         margin:10px;
+    }
+    .legal .mat-button {
+        font-size: 12px;
+
+    }
+}
+@media only screen and (min-width: 700px) { 
+    form {
+        padding: 10px 0px;
+        .ctrls {
+            flex-direction: row;
+        }
     }
 }

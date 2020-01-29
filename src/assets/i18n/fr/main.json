@@ -2,6 +2,15 @@
     "m.accept" : "Accepter",
     "m.decline" : "Refuser",
     "m.register" : "S'enregistrer",
+
+    "m.menu.home" : "Accueil",
+    "m.menu.blog" : "Technologie",
+    "m.menu.contact" : "Contactez-nous",
+    "m.menu.login"  : "Se connecter",
+    "m.menu.signup" : "Creer un compte",
+    "m.menu.cookies" : "Utilisation de Cookies",
+    "m.menu.user-data" : "Utilisation des données personnelles",
+
     "m.cookies.title" : "Utilisation de Cookies",
     "m.cookies.subtitle": "Ce site utilise des cookies, qui sont nécessaires pour des fonctionnalités comme la génération de statistiques ou le partage dans les réseaux sociaux. Acceptez-vous l'utilisation de cookies ?",
     "m.cookies.link" : "En savoir plus sur ce que nous utilizons",
