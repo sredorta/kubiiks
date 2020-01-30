@@ -21,6 +21,8 @@ import {
   MatDividerModule,
   MatInputModule,
 } from '@angular/material';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 import { KiiHeaderComponent } from './components/kii-header/kii-header.component';
 import { KiiFooterComponent } from './components/kii-footer/kii-footer.component';
 import { KiiToolbarComponent } from './components/kii-toolbar/kii-toolbar.component';
@@ -48,11 +50,15 @@ import { KiiSpinnerOverlayComponent } from './components/kii-spinner-overlay/kii
 import { KiiHttpErrorComponent } from './components/kii-http-error/kii-http-error.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { KiiHttpInterceptor } from './utils/kii-http-interceptor';
+import { KiiShareComponent } from './components/kii-share/kii-share.component';
+import { ShareModule } from '@ngx-share/core';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
+    FontAwesomeModule,
+    ShareModule,
     ReactiveFormsModule,  //Reactive forms
     MatInputModule,
     [ MatDividerModule, 
@@ -71,6 +77,7 @@ import { KiiHttpInterceptor } from './utils/kii-http-interceptor';
   ],
   declarations: [
     KiiHttpErrorComponent,
+    KiiShareComponent,
     KiiSpinnerComponent,
     KiiSpinnerOverlayComponent,
     KiiNewsletterComponent,
@@ -92,6 +99,7 @@ import { KiiHttpInterceptor } from './utils/kii-http-interceptor';
   //providers:[DeviceDetectorService,KiiInjectorService,KiiLanguageService, KiiViewTransferService],
   entryComponents:[KiiBottomSheetCookiesComponent, KiiHttpErrorComponent],
   exports:[
+    KiiShareComponent,
     KiiHttpErrorComponent,
     KiiSpinnerComponent,
     KiiSpinnerOverlayComponent,

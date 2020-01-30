@@ -1,7 +1,7 @@
-<footer class="kii-footer-wrapper">
-        <!--<div class="share-wrapper">
+<footer>
+        <div class="w100 fcr">
             <kii-share></kii-share>
-        </div>-->
+        </div>
         <kii-newsletter></kii-newsletter>
         <app-footer></app-footer>
         <div class="end "> 
@@ -10,12 +10,9 @@
                 <small style="font-style: italic; margin-left:10px">© kubiiks 2020</small>
             </div>
             <div class="social">
-                <p>Social links !</p>
-            </div>
-            <!--<div *ngIf="links.length>0" class="kii-footer-social-wrapper">
                 <ng-container *ngFor="let social of links">
-                    <a *ngIf="social.link" [title]="social.name" [href]="social.link" mat-icon-button (click)="onClick(social.name)"> <i [ngClass]="social.icon"></i></a>
+                    <a *ngIf="social.link" [title]="social.name" [href]="social.link" mat-icon-button (click)="onClick(social.name)"><fa-icon [icon]="social.icon"></fa-icon></a>
                 </ng-container>
-            </div>-->
+            </div>
         </div> 
 </footer>
